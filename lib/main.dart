@@ -59,12 +59,22 @@ Future<void> _setUpSupabase() async {
   final fetchClient = FetchClient(mode: RequestMode.cors);
 
   if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    talker.error('SUPABASE_URL or SUPABASE_ANON_KEY is not set');
     throw Exception('SUPABASE_URL or SUPABASE_ANON_KEY is not set');
   }
 
-  await Supabase.initialize(
-    url: supabaseUrl,
-    anonKey: supabaseAnonKey,
-    httpClient: fetchClient,
-  );
+  try {
+    talker.info('Initializing Supabase with URL: $supabaseUrl');
+    await Supabase.initialize(
+      url: supabaseUrl,
+      anonKey: supabaseAnonKey,
+      httpClient: fetchClient,
+    );
+    talker.info('Supabase initialized successfully');
+  } catch (e, stackTrace) {
+    talker
+      ..error('Failed to initialize Supabase: $e')
+      ..error('Stack trace: $stackTrace');
+    rethrow;
+  }
 }
