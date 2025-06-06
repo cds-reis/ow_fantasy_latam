@@ -31,14 +31,16 @@ jobs:
 
       - name: Create .env file
         run: |
-          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" > assets/.env
-          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> assets/.env
+          touch .env
+          echo "SUPABASE_URL=${{ secrets.SUPABASE_URL }}" >> .env
+          echo "SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }}" >> .env
+          ls -la
 
       - name: Run tests
         run: flutter test
 
       - name: Build web
-        run: flutter build web --release
+        run: flutter build web --release --dart-define-from-file=.env
 
       - name: Deploy to Firebase Hosting
         uses: FirebaseExtended/action-hosting-deploy@v0
