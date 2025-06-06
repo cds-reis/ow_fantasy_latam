@@ -5,7 +5,7 @@ import '../../../../entities/player/player.dart';
 import '../../../../providers/is_player_playing_right_now.dart';
 import '../../../../providers/matches_for_team_provider.dart';
 import '../../../../providers/season_provider.dart';
-import '../../../../providers/user_roster_provider.dart';
+import '../../../../providers/user_roster/user_roster_provider.dart';
 import '../../../../widgets/player_role_icon.dart';
 import 'add_player_to_roster_button.dart';
 import 'maximum_number_of_players_for_role.dart';

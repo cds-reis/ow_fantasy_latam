@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../entities/roster/roster.dart';
 import '../../../providers/season_provider.dart';
-import '../../../providers/user_roster_provider.dart';
+import '../../../providers/user_roster/user_roster_provider.dart';
 import '../../../utils/hardstring.dart';
 
 class GameWeekView extends ConsumerWidget {

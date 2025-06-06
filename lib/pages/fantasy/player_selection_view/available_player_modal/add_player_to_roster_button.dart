@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../entities/player/player.dart';
 import '../../../../providers/season_provider.dart';
-import '../../../../providers/user_roster_provider.dart';
+import '../../../../providers/user_roster/user_roster_provider.dart';
 
 class AddPlayerToRosterButton extends ConsumerWidget {
   const AddPlayerToRosterButton({required this.player, super.key});

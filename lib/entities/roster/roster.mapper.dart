@@ -41,8 +41,8 @@ class RosterMapper extends ClassMapperBase<Roster> {
   static double _$totalScore(Roster v) => v.totalScore;
   static const Field<Roster, double> _f$totalScore =
       Field('totalScore', _$totalScore, key: r'total_score');
-  static int _$transfers(Roster v) => v.transfers;
-  static const Field<Roster, int> _f$transfers =
+  static TransfersAmount _$transfers(Roster v) => v.transfers;
+  static const Field<Roster, TransfersAmount> _f$transfers =
       Field('transfers', _$transfers);
 
   @override
@@ -128,7 +128,7 @@ abstract class RosterCopyWith<$R, $In extends Roster, $Out>
       Player? secondSupport,
       SeasonId? seasonId,
       double? totalScore,
-      int? transfers});
+      TransfersAmount? transfers});
   RosterCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -162,7 +162,7 @@ class _RosterCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Roster, $Out>
           Object? secondSupport = $none,
           SeasonId? seasonId,
           double? totalScore,
-          int? transfers}) =>
+          TransfersAmount? transfers}) =>
       $apply(FieldCopyWithData({
         if (tank != $none) #tank: tank,
         if (firstDamage != $none) #firstDamage: firstDamage,
