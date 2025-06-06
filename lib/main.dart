@@ -58,6 +58,10 @@ void _setUpLogging() {
 Future<void> _setUpSupabase() async {
   final fetchClient = FetchClient(mode: RequestMode.cors);
 
+  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
+    throw Exception('SUPABASE_URL or SUPABASE_ANON_KEY is not set');
+  }
+
   await Supabase.initialize(
     url: supabaseUrl,
     anonKey: supabaseAnonKey,
