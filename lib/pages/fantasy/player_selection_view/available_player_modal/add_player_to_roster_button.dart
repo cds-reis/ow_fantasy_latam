@@ -18,7 +18,9 @@ class AddPlayerToRosterButton extends ConsumerWidget {
         onPressed: () {
           ref
               .read(
-                userRosterProvider(ref.read(selectedSeasonProvider)).notifier,
+                userRosterProvider(
+                  ref.read(selectedSeasonProvider).id,
+                ).notifier,
               )
               .addPlayer(player);
           Navigator.pop(context);

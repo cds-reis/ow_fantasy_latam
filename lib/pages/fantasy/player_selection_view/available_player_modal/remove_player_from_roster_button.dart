@@ -18,7 +18,9 @@ class RemovePlayerFromRosterButton extends ConsumerWidget {
         onPressed: () {
           ref
               .read(
-                userRosterProvider(ref.read(selectedSeasonProvider)).notifier,
+                userRosterProvider(
+                  ref.read(selectedSeasonProvider).id,
+                ).notifier,
               )
               .removePlayer(player);
           Navigator.pop(context);

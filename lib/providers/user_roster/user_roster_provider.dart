@@ -4,7 +4,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import '../../entities/player/player.dart';
 import '../../entities/roster/roster.dart';
 import '../../entities/roster/trasnfers_amount.dart';
-import '../../entities/season/season.dart';
 import '../../entities/season/season_id.dart';
 import '../supabase_provider.dart';
 
@@ -27,7 +26,7 @@ class UserRosterExists extends _$UserRosterExists {
 @riverpod
 class UserRoster extends _$UserRoster {
   @override
-  Future<Roster> build(Season season) async {
+  Future<Roster> build(SeasonId seasonId) async {
     ref.keepAlive();
     final supabase = ref.watch(supabaseProvider);
 
@@ -35,14 +34,14 @@ class UserRoster extends _$UserRoster {
       'get-fantasy-roster',
       method: HttpMethod.get,
       queryParameters: {
-        'season_id': season.id.value.toString(),
+        'season_id': seasonId.value.toString(),
       },
     );
 
     final roster = response.data as Map<String, dynamic>;
 
     ref
-        .read(userRosterExistsProvider(season.id).notifier)
+        .read(userRosterExistsProvider(seasonId).notifier)
         .set(exists: roster.isNotEmpty);
 
     if (roster.isEmpty) {
@@ -52,7 +51,7 @@ class UserRoster extends _$UserRoster {
         secondDamage: null,
         firstSupport: null,
         secondSupport: null,
-        seasonId: season.id,
+        seasonId: seasonId,
         totalScore: 0,
         transfers: TransfersAmount.zero,
       );

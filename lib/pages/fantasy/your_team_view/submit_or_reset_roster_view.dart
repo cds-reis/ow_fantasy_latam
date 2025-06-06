@@ -33,7 +33,7 @@ class SubmitOrResetRosterView extends ConsumerWidget {
                   ref
                       .read(
                         userRosterProvider(
-                          ref.read(selectedSeasonProvider),
+                          ref.read(selectedSeasonProvider).id,
                         ).notifier,
                       )
                       .reset();
@@ -84,7 +84,7 @@ class _SubmitButtonState extends ConsumerState<SubmitButton> {
           setState(() => _isLoading = true);
 
           final roster = ref
-              .read(userRosterProvider(ref.read(selectedSeasonProvider)))
+              .read(userRosterProvider(ref.read(selectedSeasonProvider).id))
               .requireValue;
 
           if (!roster.isFull) {
