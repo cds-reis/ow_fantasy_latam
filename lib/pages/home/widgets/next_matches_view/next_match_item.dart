@@ -48,6 +48,6 @@ class NextMatchItem extends StatelessWidget {
 }
 
 String _formatMatchTime(DateTime time) {
-  final formatter = DateFormat('EEE HH:mm');
+  final formatter = DateFormat('EEE, dd/MM HH:mm');
   return formatter.format(time.toLocal());
 }

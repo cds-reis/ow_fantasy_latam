@@ -26,13 +26,12 @@ Future<IList<Match>> nextMatches(Ref ref, Season season) async {
         weeks!inner( season_id ),
         first_team:season_teams!matches_team_a_id_fkey ( teams!inner ( id, name ) ),
         second_team:season_teams!matches_team_b_id_fkey ( teams!inner ( id, name ) ),
-        player_scores: player_scores!inner ( player_id, score ),
+        player_scores: player_scores ( player_id, score ),
         is_completed
 ''')
       .eq('weeks.season_id', season.id.value)
-      .eq('is_completed', true)
       .order('match_time')
-      .limit(10);
+      .limit(20);
 
   return matches.map(MatchMapper.fromMap).toIList();
 }
