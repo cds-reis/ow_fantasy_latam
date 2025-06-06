@@ -6,7 +6,7 @@ part of 'next_matches_view.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nextMatchesHash() => r'8cacbe0989cc2481447ca98d8bb2f40fff3c4149';
+String _$nextMatchesHash() => r'29bf2ca7d5522020e1f99169f160757d7f80efef';
 
 /// Copied from Dart SDK
 class _SystemHash {
