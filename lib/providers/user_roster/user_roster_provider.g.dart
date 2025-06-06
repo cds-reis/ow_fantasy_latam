@@ -6,23 +6,7 @@ part of 'user_roster_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userRosterExistsHash() => r'aade2dc519e65d4fffb6534e65d3d8bfc56d15a9';
-
-/// See also [UserRosterExists].
-@ProviderFor(UserRosterExists)
-final userRosterExistsProvider =
-    AutoDisposeNotifierProvider<UserRosterExists, bool>.internal(
-      UserRosterExists.new,
-      name: r'userRosterExistsProvider',
-      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
-          ? null
-          : _$userRosterExistsHash,
-      dependencies: null,
-      allTransitiveDependencies: null,
-    );
-
-typedef _$UserRosterExists = AutoDisposeNotifier<bool>;
-String _$userRosterHash() => r'e36ed1d2481544fda336c9b6c7122260cb5069e2';
+String _$userRosterExistsHash() => r'30c3ffddd85bb392095ea6deb1a3e824560f940a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,6 +28,136 @@ class _SystemHash {
     return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
   }
 }
+
+abstract class _$UserRosterExists extends BuildlessAutoDisposeNotifier<bool> {
+  late final SeasonId seasonId;
+
+  bool build(SeasonId seasonId);
+}
+
+/// See also [UserRosterExists].
+@ProviderFor(UserRosterExists)
+const userRosterExistsProvider = UserRosterExistsFamily();
+
+/// See also [UserRosterExists].
+class UserRosterExistsFamily extends Family<bool> {
+  /// See also [UserRosterExists].
+  const UserRosterExistsFamily();
+
+  /// See also [UserRosterExists].
+  UserRosterExistsProvider call(SeasonId seasonId) {
+    return UserRosterExistsProvider(seasonId);
+  }
+
+  @override
+  UserRosterExistsProvider getProviderOverride(
+    covariant UserRosterExistsProvider provider,
+  ) {
+    return call(provider.seasonId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'userRosterExistsProvider';
+}
+
+/// See also [UserRosterExists].
+class UserRosterExistsProvider
+    extends AutoDisposeNotifierProviderImpl<UserRosterExists, bool> {
+  /// See also [UserRosterExists].
+  UserRosterExistsProvider(SeasonId seasonId)
+    : this._internal(
+        () => UserRosterExists()..seasonId = seasonId,
+        from: userRosterExistsProvider,
+        name: r'userRosterExistsProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$userRosterExistsHash,
+        dependencies: UserRosterExistsFamily._dependencies,
+        allTransitiveDependencies:
+            UserRosterExistsFamily._allTransitiveDependencies,
+        seasonId: seasonId,
+      );
+
+  UserRosterExistsProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.seasonId,
+  }) : super.internal();
+
+  final SeasonId seasonId;
+
+  @override
+  bool runNotifierBuild(covariant UserRosterExists notifier) {
+    return notifier.build(seasonId);
+  }
+
+  @override
+  Override overrideWith(UserRosterExists Function() create) {
+    return ProviderOverride(
+      origin: this,
+      override: UserRosterExistsProvider._internal(
+        () => create()..seasonId = seasonId,
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        seasonId: seasonId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeNotifierProviderElement<UserRosterExists, bool> createElement() {
+    return _UserRosterExistsProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is UserRosterExistsProvider && other.seasonId == seasonId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, seasonId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin UserRosterExistsRef on AutoDisposeNotifierProviderRef<bool> {
+  /// The parameter `seasonId` of this provider.
+  SeasonId get seasonId;
+}
+
+class _UserRosterExistsProviderElement
+    extends AutoDisposeNotifierProviderElement<UserRosterExists, bool>
+    with UserRosterExistsRef {
+  _UserRosterExistsProviderElement(super.provider);
+
+  @override
+  SeasonId get seasonId => (origin as UserRosterExistsProvider).seasonId;
+}
+
+String _$userRosterHash() => r'c28048f41c78979e5bac1ba04901187d6a424f1c';
 
 abstract class _$UserRoster extends BuildlessAutoDisposeAsyncNotifier<Roster> {
   late final Season season;

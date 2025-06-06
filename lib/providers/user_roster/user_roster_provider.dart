@@ -1,18 +1,21 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../entities/player/player.dart';
-import '../entities/roster/roster.dart';
-import '../entities/season/season.dart';
-import 'supabase_provider.dart';
+import '../../entities/player/player.dart';
+import '../../entities/roster/roster.dart';
+import '../../entities/roster/trasnfers_amount.dart';
+import '../../entities/season/season.dart';
+import '../../entities/season/season_id.dart';
+import '../supabase_provider.dart';
 
 part 'user_roster_provider.g.dart';
 
 @riverpod
 class UserRosterExists extends _$UserRosterExists {
   @override
-  bool build() {
+  bool build(SeasonId seasonId) {
     ref.keepAlive();
+
     return false;
   }
 
@@ -38,7 +41,9 @@ class UserRoster extends _$UserRoster {
 
     final roster = response.data as Map<String, dynamic>;
 
-    ref.read(userRosterExistsProvider.notifier).set(exists: roster.isNotEmpty);
+    ref
+        .read(userRosterExistsProvider(season.id).notifier)
+        .set(exists: roster.isNotEmpty);
 
     if (roster.isEmpty) {
       return Roster(
@@ -49,49 +54,11 @@ class UserRoster extends _$UserRoster {
         secondSupport: null,
         seasonId: season.id,
         totalScore: 0,
-        transfers: 0,
+        transfers: TransfersAmount.zero,
       );
     }
 
     return RosterMapper.fromMap(roster);
-  }
-
-  Future<void> submit() async {
-    final supabase = ref.read(supabaseProvider);
-
-    final user = supabase.auth.currentUser!;
-    final roster = state.requireValue;
-    final seasonId = roster.seasonId;
-
-    final table = supabase.from('fantasy_rosters');
-    final exists = ref.read(userRosterExistsProvider);
-    if (exists) {
-      await table
-          .update({
-            'tank_id': roster.tank?.id,
-            'first_dps_id': roster.firstDamage?.id,
-            'second_dps_id': roster.secondDamage?.id,
-            'first_support_id': roster.firstSupport?.id,
-            'second_support_id': roster.secondSupport?.id,
-          })
-          .eq('id', user.id)
-          .eq('season_id', seasonId.value);
-    } else {
-      await table.insert({
-        'id': user.id,
-        'season_id': seasonId.value,
-        'tank_id': roster.tank?.id,
-        'first_dps_id': roster.firstDamage?.id,
-        'second_dps_id': roster.secondDamage?.id,
-        'first_support_id': roster.firstSupport?.id,
-        'second_support_id': roster.secondSupport?.id,
-      });
-
-      await supabase.from('fantasy_roster_details').insert({
-        'id': user.id,
-        'season_id': seasonId.value,
-      });
-    }
   }
 
   void addPlayer(Player player) {
