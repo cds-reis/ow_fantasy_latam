@@ -3,9 +3,11 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../entities/exceptions/no_transfers_available.dart';
 import '../../../entities/roster/roster.dart';
 import '../../../providers/season_provider.dart';
-import '../../../providers/user_roster_provider.dart';
+import '../../../providers/user_roster/submit_user_roster_provider.dart';
+import '../../../providers/user_roster/user_roster_provider.dart';
 import '../../../utils/build_context_extensions.dart';
 
 class SubmitOrResetRosterView extends ConsumerWidget {
@@ -109,17 +111,19 @@ class _SubmitButtonState extends ConsumerState<SubmitButton> {
             return;
           }
 
-          await ref
-              .read(
-                userRosterProvider(ref.read(selectedSeasonProvider)).notifier,
-              )
-              .submit();
+          await ref.read(submitUserRosterProvider(roster).future);
 
           if (!context.mounted) {
             return;
           }
 
           context.showSuccessSnackBar('Roster submitted successfully');
+        } on NoTransfersAvailableException catch (e) {
+          if (!context.mounted) {
+            return;
+          }
+
+          context.showErrorSnackBar(e.message);
         } on Exception catch (e, st) {
           if (!context.mounted) {
             return;

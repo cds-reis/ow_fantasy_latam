@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'next_matches_view.dart';
+part of 'submit_user_roster_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nextMatchesHash() => r'8cacbe0989cc2481447ca98d8bb2f40fff3c4149';
+String _$submitUserRosterHash() => r'494108172044bcab1e8188bd0ad5f18658282b20';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,25 +29,25 @@ class _SystemHash {
   }
 }
 
-/// See also [nextMatches].
-@ProviderFor(nextMatches)
-const nextMatchesProvider = NextMatchesFamily();
+/// See also [submitUserRoster].
+@ProviderFor(submitUserRoster)
+const submitUserRosterProvider = SubmitUserRosterFamily();
 
-/// See also [nextMatches].
-class NextMatchesFamily extends Family<AsyncValue<IList<Match>>> {
-  /// See also [nextMatches].
-  const NextMatchesFamily();
+/// See also [submitUserRoster].
+class SubmitUserRosterFamily extends Family<AsyncValue<void>> {
+  /// See also [submitUserRoster].
+  const SubmitUserRosterFamily();
 
-  /// See also [nextMatches].
-  NextMatchesProvider call(Season season) {
-    return NextMatchesProvider(season);
+  /// See also [submitUserRoster].
+  SubmitUserRosterProvider call(Roster roster) {
+    return SubmitUserRosterProvider(roster);
   }
 
   @override
-  NextMatchesProvider getProviderOverride(
-    covariant NextMatchesProvider provider,
+  SubmitUserRosterProvider getProviderOverride(
+    covariant SubmitUserRosterProvider provider,
   ) {
-    return call(provider.season);
+    return call(provider.roster);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -62,69 +62,70 @@ class NextMatchesFamily extends Family<AsyncValue<IList<Match>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'nextMatchesProvider';
+  String? get name => r'submitUserRosterProvider';
 }
 
-/// See also [nextMatches].
-class NextMatchesProvider extends AutoDisposeFutureProvider<IList<Match>> {
-  /// See also [nextMatches].
-  NextMatchesProvider(Season season)
+/// See also [submitUserRoster].
+class SubmitUserRosterProvider extends AutoDisposeFutureProvider<void> {
+  /// See also [submitUserRoster].
+  SubmitUserRosterProvider(Roster roster)
     : this._internal(
-        (ref) => nextMatches(ref as NextMatchesRef, season),
-        from: nextMatchesProvider,
-        name: r'nextMatchesProvider',
+        (ref) => submitUserRoster(ref as SubmitUserRosterRef, roster),
+        from: submitUserRosterProvider,
+        name: r'submitUserRosterProvider',
         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
             ? null
-            : _$nextMatchesHash,
-        dependencies: NextMatchesFamily._dependencies,
-        allTransitiveDependencies: NextMatchesFamily._allTransitiveDependencies,
-        season: season,
+            : _$submitUserRosterHash,
+        dependencies: SubmitUserRosterFamily._dependencies,
+        allTransitiveDependencies:
+            SubmitUserRosterFamily._allTransitiveDependencies,
+        roster: roster,
       );
 
-  NextMatchesProvider._internal(
+  SubmitUserRosterProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.season,
+    required this.roster,
   }) : super.internal();
 
-  final Season season;
+  final Roster roster;
 
   @override
   Override overrideWith(
-    FutureOr<IList<Match>> Function(NextMatchesRef provider) create,
+    FutureOr<void> Function(SubmitUserRosterRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: NextMatchesProvider._internal(
-        (ref) => create(ref as NextMatchesRef),
+      override: SubmitUserRosterProvider._internal(
+        (ref) => create(ref as SubmitUserRosterRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        season: season,
+        roster: roster,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<IList<Match>> createElement() {
-    return _NextMatchesProviderElement(this);
+  AutoDisposeFutureProviderElement<void> createElement() {
+    return _SubmitUserRosterProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is NextMatchesProvider && other.season == season;
+    return other is SubmitUserRosterProvider && other.roster == roster;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, season.hashCode);
+    hash = _SystemHash.combine(hash, roster.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -132,18 +133,18 @@ class NextMatchesProvider extends AutoDisposeFutureProvider<IList<Match>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin NextMatchesRef on AutoDisposeFutureProviderRef<IList<Match>> {
-  /// The parameter `season` of this provider.
-  Season get season;
+mixin SubmitUserRosterRef on AutoDisposeFutureProviderRef<void> {
+  /// The parameter `roster` of this provider.
+  Roster get roster;
 }
 
-class _NextMatchesProviderElement
-    extends AutoDisposeFutureProviderElement<IList<Match>>
-    with NextMatchesRef {
-  _NextMatchesProviderElement(super.provider);
+class _SubmitUserRosterProviderElement
+    extends AutoDisposeFutureProviderElement<void>
+    with SubmitUserRosterRef {
+  _SubmitUserRosterProviderElement(super.provider);
 
   @override
-  Season get season => (origin as NextMatchesProvider).season;
+  Roster get roster => (origin as SubmitUserRosterProvider).roster;
 }
 
 // ignore_for_file: type=lint

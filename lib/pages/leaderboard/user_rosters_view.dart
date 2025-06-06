@@ -96,8 +96,9 @@ class _UserRosterHeader extends StatelessWidget {
         const Row(
           children: [
             Expanded(
+              flex: 2,
               child: Text(
-                'Season Score',
+                'Score',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 16,
@@ -106,6 +107,7 @@ class _UserRosterHeader extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 2,
               child: Text(
                 'Tank',
                 textAlign: TextAlign.center,
@@ -116,6 +118,7 @@ class _UserRosterHeader extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 3,
               child: Text(
                 'Damage',
                 textAlign: TextAlign.center,
@@ -126,6 +129,7 @@ class _UserRosterHeader extends StatelessWidget {
               ),
             ),
             Expanded(
+              flex: 3,
               child: Text(
                 'Support',
                 textAlign: TextAlign.center,
@@ -152,6 +156,7 @@ class _UserRosterRow extends StatelessWidget {
     return Row(
       children: [
         Expanded(
+          flex: 2,
           child: Text(
             roster.totalScore.toString(),
             style: const TextStyle(fontSize: 16),
@@ -159,6 +164,7 @@ class _UserRosterRow extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 2,
           child: Text(
             roster.tankName,
             style: const TextStyle(fontSize: 16),
@@ -166,6 +172,7 @@ class _UserRosterRow extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 3,
           child: Text(
             '${roster.firstDamageName} - ${roster.secondDamageName}',
             style: const TextStyle(fontSize: 16),
@@ -173,6 +180,7 @@ class _UserRosterRow extends StatelessWidget {
           ),
         ),
         Expanded(
+          flex: 3,
           child: Text(
             '${roster.firstSupportName} - ${roster.secondSupportName}',
             style: const TextStyle(fontSize: 16),
