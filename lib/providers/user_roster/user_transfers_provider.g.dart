@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'next_matches_view.dart';
+part of 'user_transfers_provider.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$nextMatchesHash() => r'8cacbe0989cc2481447ca98d8bb2f40fff3c4149';
+String _$userTransfersHash() => r'6c87b84a1ca523c11761733fbfa99c77b7c6fe71';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,25 +29,25 @@ class _SystemHash {
   }
 }
 
-/// See also [nextMatches].
-@ProviderFor(nextMatches)
-const nextMatchesProvider = NextMatchesFamily();
+/// See also [userTransfers].
+@ProviderFor(userTransfers)
+const userTransfersProvider = UserTransfersFamily();
 
-/// See also [nextMatches].
-class NextMatchesFamily extends Family<AsyncValue<IList<Match>>> {
-  /// See also [nextMatches].
-  const NextMatchesFamily();
+/// See also [userTransfers].
+class UserTransfersFamily extends Family<AsyncValue<TransfersAmount>> {
+  /// See also [userTransfers].
+  const UserTransfersFamily();
 
-  /// See also [nextMatches].
-  NextMatchesProvider call(Season season) {
-    return NextMatchesProvider(season);
+  /// See also [userTransfers].
+  UserTransfersProvider call(SeasonId seasonId) {
+    return UserTransfersProvider(seasonId);
   }
 
   @override
-  NextMatchesProvider getProviderOverride(
-    covariant NextMatchesProvider provider,
+  UserTransfersProvider getProviderOverride(
+    covariant UserTransfersProvider provider,
   ) {
-    return call(provider.season);
+    return call(provider.seasonId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -62,69 +62,70 @@ class NextMatchesFamily extends Family<AsyncValue<IList<Match>>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'nextMatchesProvider';
+  String? get name => r'userTransfersProvider';
 }
 
-/// See also [nextMatches].
-class NextMatchesProvider extends AutoDisposeFutureProvider<IList<Match>> {
-  /// See also [nextMatches].
-  NextMatchesProvider(Season season)
+/// See also [userTransfers].
+class UserTransfersProvider extends AutoDisposeFutureProvider<TransfersAmount> {
+  /// See also [userTransfers].
+  UserTransfersProvider(SeasonId seasonId)
     : this._internal(
-        (ref) => nextMatches(ref as NextMatchesRef, season),
-        from: nextMatchesProvider,
-        name: r'nextMatchesProvider',
+        (ref) => userTransfers(ref as UserTransfersRef, seasonId),
+        from: userTransfersProvider,
+        name: r'userTransfersProvider',
         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
             ? null
-            : _$nextMatchesHash,
-        dependencies: NextMatchesFamily._dependencies,
-        allTransitiveDependencies: NextMatchesFamily._allTransitiveDependencies,
-        season: season,
+            : _$userTransfersHash,
+        dependencies: UserTransfersFamily._dependencies,
+        allTransitiveDependencies:
+            UserTransfersFamily._allTransitiveDependencies,
+        seasonId: seasonId,
       );
 
-  NextMatchesProvider._internal(
+  UserTransfersProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.season,
+    required this.seasonId,
   }) : super.internal();
 
-  final Season season;
+  final SeasonId seasonId;
 
   @override
   Override overrideWith(
-    FutureOr<IList<Match>> Function(NextMatchesRef provider) create,
+    FutureOr<TransfersAmount> Function(UserTransfersRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
-      override: NextMatchesProvider._internal(
-        (ref) => create(ref as NextMatchesRef),
+      override: UserTransfersProvider._internal(
+        (ref) => create(ref as UserTransfersRef),
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        season: season,
+        seasonId: seasonId,
       ),
     );
   }
 
   @override
-  AutoDisposeFutureProviderElement<IList<Match>> createElement() {
-    return _NextMatchesProviderElement(this);
+  AutoDisposeFutureProviderElement<TransfersAmount> createElement() {
+    return _UserTransfersProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is NextMatchesProvider && other.season == season;
+    return other is UserTransfersProvider && other.seasonId == seasonId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, season.hashCode);
+    hash = _SystemHash.combine(hash, seasonId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -132,18 +133,18 @@ class NextMatchesProvider extends AutoDisposeFutureProvider<IList<Match>> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin NextMatchesRef on AutoDisposeFutureProviderRef<IList<Match>> {
-  /// The parameter `season` of this provider.
-  Season get season;
+mixin UserTransfersRef on AutoDisposeFutureProviderRef<TransfersAmount> {
+  /// The parameter `seasonId` of this provider.
+  SeasonId get seasonId;
 }
 
-class _NextMatchesProviderElement
-    extends AutoDisposeFutureProviderElement<IList<Match>>
-    with NextMatchesRef {
-  _NextMatchesProviderElement(super.provider);
+class _UserTransfersProviderElement
+    extends AutoDisposeFutureProviderElement<TransfersAmount>
+    with UserTransfersRef {
+  _UserTransfersProviderElement(super.provider);
 
   @override
-  Season get season => (origin as NextMatchesProvider).season;
+  SeasonId get seasonId => (origin as UserTransfersProvider).seasonId;
 }
 
 // ignore_for_file: type=lint

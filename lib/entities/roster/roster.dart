@@ -5,6 +5,7 @@ import 'package:equatable/equatable.dart';
 import '../player/player.dart';
 import '../player/player_role.dart';
 import '../season/season_id.dart';
+import 'trasnfers_amount.dart';
 
 part 'roster.mapper.dart';
 
@@ -29,7 +30,7 @@ class Roster with RosterMappable, EquatableMixin {
   final Player? firstSupport;
   final Player? secondSupport;
   final double totalScore;
-  final int transfers;
+  final TransfersAmount transfers;
   final SeasonId seasonId;
 
   bool hasPlayer(Player player) {
@@ -65,7 +66,7 @@ class Roster with RosterMappable, EquatableMixin {
     };
   }
 
-  bool get hasSpaceForTransfers => transfers > 0;
+  bool get hasSpaceForTransfers => transfers.hasSpace;
 
   bool get onlyTwoOfSameTeam {
     final teams = [

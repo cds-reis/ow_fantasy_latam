@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../providers/season_provider.dart';
-import '../../../../providers/user_roster_provider.dart';
+import '../../../../providers/user_roster/user_roster_provider.dart';
 import 'selected_player_item.dart';
 
 class SelectedPlayersView extends ConsumerWidget {
