@@ -36,7 +36,7 @@ class AvailablePlayerModal extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final roster = ref
-        .watch(userRosterProvider(ref.watch(selectedSeasonProvider)))
+        .watch(userRosterProvider(ref.watch(selectedSeasonProvider).id))
         .requireValue;
 
     final matches = ref.watch(matchesForTeamProvider(player.team));

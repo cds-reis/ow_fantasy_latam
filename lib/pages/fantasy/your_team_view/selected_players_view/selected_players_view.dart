@@ -11,7 +11,7 @@ class SelectedPlayersView extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final roster = ref.watch(
-      userRosterProvider(ref.watch(selectedSeasonProvider)),
+      userRosterProvider(ref.watch(selectedSeasonProvider).id),
     );
 
     return SelectionArea(

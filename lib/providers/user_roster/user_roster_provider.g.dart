@@ -157,12 +157,12 @@ class _UserRosterExistsProviderElement
   SeasonId get seasonId => (origin as UserRosterExistsProvider).seasonId;
 }
 
-String _$userRosterHash() => r'c28048f41c78979e5bac1ba04901187d6a424f1c';
+String _$userRosterHash() => r'0e67bc96eef974639b495edfe3a5aeb27645af7e';
 
 abstract class _$UserRoster extends BuildlessAutoDisposeAsyncNotifier<Roster> {
-  late final Season season;
+  late final SeasonId seasonId;
 
-  FutureOr<Roster> build(Season season);
+  FutureOr<Roster> build(SeasonId seasonId);
 }
 
 /// See also [UserRoster].
@@ -175,15 +175,15 @@ class UserRosterFamily extends Family<AsyncValue<Roster>> {
   const UserRosterFamily();
 
   /// See also [UserRoster].
-  UserRosterProvider call(Season season) {
-    return UserRosterProvider(season);
+  UserRosterProvider call(SeasonId seasonId) {
+    return UserRosterProvider(seasonId);
   }
 
   @override
   UserRosterProvider getProviderOverride(
     covariant UserRosterProvider provider,
   ) {
-    return call(provider.season);
+    return call(provider.seasonId);
   }
 
   static const Iterable<ProviderOrFamily>? _dependencies = null;
@@ -205,9 +205,9 @@ class UserRosterFamily extends Family<AsyncValue<Roster>> {
 class UserRosterProvider
     extends AutoDisposeAsyncNotifierProviderImpl<UserRoster, Roster> {
   /// See also [UserRoster].
-  UserRosterProvider(Season season)
+  UserRosterProvider(SeasonId seasonId)
     : this._internal(
-        () => UserRoster()..season = season,
+        () => UserRoster()..seasonId = seasonId,
         from: userRosterProvider,
         name: r'userRosterProvider',
         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -215,7 +215,7 @@ class UserRosterProvider
             : _$userRosterHash,
         dependencies: UserRosterFamily._dependencies,
         allTransitiveDependencies: UserRosterFamily._allTransitiveDependencies,
-        season: season,
+        seasonId: seasonId,
       );
 
   UserRosterProvider._internal(
@@ -225,14 +225,14 @@ class UserRosterProvider
     required super.allTransitiveDependencies,
     required super.debugGetCreateSourceHash,
     required super.from,
-    required this.season,
+    required this.seasonId,
   }) : super.internal();
 
-  final Season season;
+  final SeasonId seasonId;
 
   @override
   FutureOr<Roster> runNotifierBuild(covariant UserRoster notifier) {
-    return notifier.build(season);
+    return notifier.build(seasonId);
   }
 
   @override
@@ -240,13 +240,13 @@ class UserRosterProvider
     return ProviderOverride(
       origin: this,
       override: UserRosterProvider._internal(
-        () => create()..season = season,
+        () => create()..seasonId = seasonId,
         from: from,
         name: null,
         dependencies: null,
         allTransitiveDependencies: null,
         debugGetCreateSourceHash: null,
-        season: season,
+        seasonId: seasonId,
       ),
     );
   }
@@ -258,13 +258,13 @@ class UserRosterProvider
 
   @override
   bool operator ==(Object other) {
-    return other is UserRosterProvider && other.season == season;
+    return other is UserRosterProvider && other.seasonId == seasonId;
   }
 
   @override
   int get hashCode {
     var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, season.hashCode);
+    hash = _SystemHash.combine(hash, seasonId.hashCode);
 
     return _SystemHash.finish(hash);
   }
@@ -273,8 +273,8 @@ class UserRosterProvider
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 mixin UserRosterRef on AutoDisposeAsyncNotifierProviderRef<Roster> {
-  /// The parameter `season` of this provider.
-  Season get season;
+  /// The parameter `seasonId` of this provider.
+  SeasonId get seasonId;
 }
 
 class _UserRosterProviderElement
@@ -283,7 +283,7 @@ class _UserRosterProviderElement
   _UserRosterProviderElement(super.provider);
 
   @override
-  Season get season => (origin as UserRosterProvider).season;
+  SeasonId get seasonId => (origin as UserRosterProvider).seasonId;
 }
 
 // ignore_for_file: type=lint

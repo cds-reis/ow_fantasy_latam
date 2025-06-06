@@ -35,6 +35,8 @@ Future<void> submitUserRoster(Ref ref, Roster roster) async {
         'second_support_id': roster.secondSupport?.id,
       },
     );
+
+    ref.invalidate(userRosterProvider(seasonId));
   } else {
     await table.insert({
       'id': user.id,
