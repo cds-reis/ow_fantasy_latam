@@ -8,7 +8,11 @@
             "name": "ow_fantasy_latam",
             "request": "launch",
             "type": "dart",
-            "program": "lib/main.dart"
+            "program": "lib/main.dart",
+            "args": [
+                "--dart-define=SUPABASE_URL=https://hqhudvgihomrtesqkiww.supabase.co",
+                "--dart-define=SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhxaHVkdmdpaG9tcnRlc3FraXd3Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDg1NzM1NTcsImV4cCI6MjA2NDE0OTU1N30.rZ9dSBRZruVwusUNh1MCU2X0Uxsk5J2CxIWFzy46d68"
+            ]
         },
         {
             "name": "ow_fantasy_latam (profile mode)",
