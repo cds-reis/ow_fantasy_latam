@@ -24,15 +24,16 @@ class _AvailablePlayersViewState extends ConsumerState<AvailablePlayersView> {
 
   @override
   Widget build(BuildContext context) {
-    final availablePlayers = ref.watch(
-      filteredAvailablePlayersProvider(
-        season: ref.watch(selectedSeasonProvider),
-        filter: ref.watch(filterByProvider),
-        sorting: ref.watch(availablePlayerSortingProvider),
-        maxCost: ref.watch(maxCostProvider),
-        searchQuery: ref.watch(searchPlayerByNameQueryProvider),
-      ),
+    final provider = filteredAvailablePlayersProvider(
+      season: ref.watch(selectedSeasonProvider),
+      filter: ref.watch(filterByProvider),
+      sorting: ref.watch(availablePlayerSortingProvider),
+      maxCost: ref.watch(maxCostProvider),
+      searchQuery: ref.watch(searchPlayerByNameQueryProvider),
     );
+
+    final availablePlayers = ref.watch(provider);
+    ref.listen(provider, (_, _) => setState(() => page = 0));
 
     return availablePlayers.when(
       data: (players) {
@@ -45,7 +46,7 @@ class _AvailablePlayersViewState extends ConsumerState<AvailablePlayersView> {
             const AvailablePlayerItemHeader(),
             for (final player in sublist) AvailablePlayerItem(player: player),
             PageIndicator(
-              page: page,
+              page: players.isEmpty ? 0 : page + 1,
               maxPage: maxPage,
               onPageBack: switch (page) {
                 0 => null,
