@@ -3,7 +3,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../entities/exceptions/no_transfers_available.dart';
+import '../../../entities/exceptions/roster_creation_exception.dart';
 import '../../../entities/roster/roster.dart';
 import '../../../providers/season_provider.dart';
 import '../../../providers/user_roster/submit_user_roster_provider.dart';
@@ -118,7 +118,7 @@ class _SubmitButtonState extends ConsumerState<SubmitButton> {
           }
 
           context.showSuccessSnackBar('Roster submitted successfully');
-        } on NoTransfersAvailableException catch (e) {
+        } on RosterCreationException catch (e) {
           if (!context.mounted) {
             return;
           }
