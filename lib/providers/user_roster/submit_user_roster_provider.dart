@@ -17,7 +17,7 @@ Future<void> submitUserRoster(Ref ref, Roster roster) async {
   final seasonId = roster.seasonId;
 
   final table = supabase.from('fantasy_rosters');
-  final exists = ref.watch(userRosterExistsProvider(roster.seasonId));
+  final exists = ref.watch(userRosterExistsProvider(seasonId));
   if (exists) {
     final transfers = await ref.watch(userTransfersProvider(seasonId).future);
     if (!transfers.hasSpace) {
