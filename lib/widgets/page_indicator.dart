@@ -24,7 +24,7 @@ class PageIndicator extends StatelessWidget {
           icon: const Icon(Icons.arrow_left),
         ),
         Text(
-          '${page + 1} / $maxPage',
+          '$page / $maxPage',
           style: const TextStyle(fontSize: 16),
         ),
         IconButton(
