@@ -157,7 +157,7 @@ class _UserRosterExistsProviderElement
   SeasonId get seasonId => (origin as UserRosterExistsProvider).seasonId;
 }
 
-String _$userRosterHash() => r'0e67bc96eef974639b495edfe3a5aeb27645af7e';
+String _$userRosterHash() => r'8159795c6b796523dd24b88ea79b8c26253eaa71';
 
 abstract class _$UserRoster extends BuildlessAutoDisposeAsyncNotifier<Roster> {
   late final SeasonId seasonId;

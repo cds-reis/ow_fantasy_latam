@@ -42,7 +42,7 @@ class UserRoster extends _$UserRoster {
 
     ref
         .read(userRosterExistsProvider(seasonId).notifier)
-        .set(exists: roster.isNotEmpty);
+        .set(exists: roster['tank_id'] != null);
 
     if (roster.isEmpty) {
       return Roster(
