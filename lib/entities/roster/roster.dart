@@ -20,9 +20,18 @@ class Roster with RosterMappable, EquatableMixin {
     required this.seasonId,
     required this.totalScore,
     required this.transfers,
+    required this.budget,
   });
 
-  static const maxCost = 100;
+  const Roster.empty({required this.seasonId})
+    : tank = null,
+      firstDamage = null,
+      secondDamage = null,
+      firstSupport = null,
+      secondSupport = null,
+      totalScore = 0,
+      transfers = const TransfersAmount(0),
+      budget = 100;
 
   final Player? tank;
   final Player? firstDamage;
@@ -31,6 +40,7 @@ class Roster with RosterMappable, EquatableMixin {
   final Player? secondSupport;
   final double totalScore;
   final TransfersAmount transfers;
+  final int budget;
   final SeasonId seasonId;
 
   bool hasPlayer(Player player) {
@@ -101,18 +111,33 @@ class Roster with RosterMappable, EquatableMixin {
 
     switch (player.role) {
       case PlayerRole.tank:
-        return copyWith(tank: player);
+        return copyWith(
+          tank: player,
+          budget: budget - player.cost,
+        );
       case PlayerRole.damage:
         if (firstDamage == null) {
-          return copyWith(firstDamage: player);
+          return copyWith(
+            firstDamage: player,
+            budget: budget - player.cost,
+          );
         } else {
-          return copyWith(secondDamage: player);
+          return copyWith(
+            secondDamage: player,
+            budget: budget - player.cost,
+          );
         }
       case PlayerRole.support:
         if (firstSupport == null) {
-          return copyWith(firstSupport: player);
+          return copyWith(
+            firstSupport: player,
+            budget: budget - player.cost,
+          );
         } else {
-          return copyWith(secondSupport: player);
+          return copyWith(
+            secondSupport: player,
+            budget: budget - player.cost,
+          );
         }
     }
   }
@@ -124,29 +149,31 @@ class Roster with RosterMappable, EquatableMixin {
     );
 
     if (player == tank) {
-      return copyWith(tank: null);
+      return copyWith(
+        tank: null,
+        budget: budget + player.cost,
+      );
     } else if (player == firstDamage) {
-      return copyWith(firstDamage: null);
+      return copyWith(
+        firstDamage: null,
+        budget: budget + player.cost,
+      );
     } else if (player == secondDamage) {
-      return copyWith(secondDamage: null);
+      return copyWith(
+        secondDamage: null,
+        budget: budget + player.cost,
+      );
     } else if (player == firstSupport) {
-      return copyWith(firstSupport: null);
+      return copyWith(
+        firstSupport: null,
+        budget: budget + player.cost,
+      );
     } else {
-      return copyWith(secondSupport: null);
+      return copyWith(
+        secondSupport: null,
+        budget: budget + player.cost,
+      );
     }
-  }
-
-  Roster reset() {
-    return Roster(
-      tank: null,
-      firstDamage: null,
-      secondDamage: null,
-      firstSupport: null,
-      secondSupport: null,
-      seasonId: seasonId,
-      totalScore: totalScore,
-      transfers: transfers,
-    );
   }
 
   @override
@@ -159,32 +186,4 @@ class Roster with RosterMappable, EquatableMixin {
     seasonId,
     totalScore,
   ];
-}
-
-class RosterHook extends MappingHook {
-  const RosterHook();
-
-  @override
-  Object? beforeDecode(Object? value) {
-    final players = List<Map<String, dynamic>>.from(
-      (value! as Map<String, dynamic>)['players'] as List<dynamic>,
-    );
-
-    final tank = players.singleWhere((e) => e['role'] == 'tank');
-    final [firstDamage, secondDamage] = players
-        .where((e) => e['role'] == 'damage')
-        .toList();
-    final [firstSupport, secondSupport] = players
-        .where((e) => e['role'] == 'support')
-        .toList();
-
-    return {
-      'tank': tank,
-      'first_damage': firstDamage,
-      'second_damage': secondDamage,
-      'first_support': firstSupport,
-      'second_support': secondSupport,
-      'season_id': tank['season_id'],
-    };
-  }
 }

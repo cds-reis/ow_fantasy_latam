@@ -1,1 +1,1 @@
-extension type SeasonId(int value) {}
+extension type const SeasonId(int value) {}

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 
 import '../../../../entities/match/match.dart';
+import '../../../../utils/format_readable_date.dart';
 
 class NextMatchItem extends StatelessWidget {
   const NextMatchItem({required this.match, super.key});
@@ -22,7 +22,7 @@ class NextMatchItem extends StatelessWidget {
             Expanded(
               flex: 2,
               child: Text(
-                _formatMatchTime(match.matchTime),
+                formatReadableDate(match.matchTime),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -45,9 +45,4 @@ class NextMatchItem extends StatelessWidget {
       ),
     );
   }
-}
-
-String _formatMatchTime(DateTime time) {
-  final formatter = DateFormat('EEE, dd/MM HH:mm');
-  return formatter.format(time.toLocal());
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:gap/gap.dart';
 
-import '../../../entities/roster/roster.dart';
+import '../../../providers/roster_deadline_provider.dart';
 import '../../../providers/season_provider.dart';
 import '../../../providers/user_roster/user_roster_provider.dart';
+import '../../../utils/format_readable_date.dart';
 import '../../../utils/hardstring.dart';
 
 class GameWeekView extends ConsumerWidget {
@@ -55,20 +55,32 @@ class GameWeekView extends ConsumerWidget {
                     ),
                   ),
                   const VerticalDivider(color: Colors.white, width: 5),
-                  if (roster == null)
-                    const Expanded(
-                      child: GameWeekItem(label: 'Cost', value: '...'),
-                    )
-                  else
-                    Expanded(
-                      child: GameWeekItem(
-                        label: 'Roster Cost',
-                        value: '${roster.cost} / ${Roster.maxCost}',
-                      ),
+                  Expanded(
+                    child: Consumer(
+                      builder: (context, ref, child) {
+                        final deadline = ref
+                            .watch(rosterDeadlineProvider)
+                            .valueOrNull;
+
+                        return GameWeekItem(
+                          label: 'Deadline',
+                          value: deadline != null
+                              ? formatReadableDate(deadline.deadline)
+                              : '...',
+                        );
+                      },
                     ),
+                  ),
                   const VerticalDivider(color: Colors.white, width: 5),
                   Expanded(
-                    child: GameWeekItem(
+                    child: GameWeekItem.highlighted(
+                      label: 'Budget',
+                      value: roster != null ? roster.budget.toString() : '...',
+                    ),
+                  ),
+                  const VerticalDivider(color: Colors.white, width: 5),
+                  Expanded(
+                    child: GameWeekItem.highlighted(
                       label: 'Transfers',
                       value: roster?.transfers.toString() ?? '...',
                     ),
@@ -84,21 +96,47 @@ class GameWeekView extends ConsumerWidget {
 }
 
 class GameWeekItem extends StatelessWidget {
-  const GameWeekItem({required this.label, required this.value, super.key});
+  const GameWeekItem({
+    required this.label,
+    required this.value,
+    super.key,
+  }) : highlighted = false;
+
+  const GameWeekItem.highlighted({
+    required this.label,
+    required this.value,
+    super.key,
+  }) : highlighted = true;
 
   final String label;
   final String value;
+  final bool highlighted;
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: 8,
       children: [
         Text(
           label,
           style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-        const Gap(8),
-        Text(value, style: const TextStyle(fontSize: 16)),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: highlighted ? Colors.green.shade700 : Colors.transparent,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            child: Text(
+              value,
+              style: TextStyle(
+                fontSize: 16,
+                color: highlighted ? Colors.black : Colors.white,
+              ),
+            ),
+          ),
+        ),
       ],
     );
   }

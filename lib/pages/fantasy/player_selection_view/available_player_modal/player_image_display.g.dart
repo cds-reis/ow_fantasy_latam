@@ -6,7 +6,7 @@ part of 'player_image_display.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$playerImageHash() => r'8b433c3a72fa8ff3cec345c20a8d3c0fdf1631d1';
+String _$playerImageHash() => r'd92454943c461de9408a6fef3d45a00f48cd3cbc';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -34,7 +34,7 @@ class _SystemHash {
 const playerImageProvider = PlayerImageFamily();
 
 /// See also [playerImage].
-class PlayerImageFamily extends Family<AsyncValue<PlayerImage>> {
+class PlayerImageFamily extends Family<AsyncValue<Option<PlayerImage>>> {
   /// See also [playerImage].
   const PlayerImageFamily();
 
@@ -66,7 +66,8 @@ class PlayerImageFamily extends Family<AsyncValue<PlayerImage>> {
 }
 
 /// See also [playerImage].
-class PlayerImageProvider extends AutoDisposeFutureProvider<PlayerImage> {
+class PlayerImageProvider
+    extends AutoDisposeFutureProvider<Option<PlayerImage>> {
   /// See also [playerImage].
   PlayerImageProvider(Player player)
     : this._internal(
@@ -95,7 +96,7 @@ class PlayerImageProvider extends AutoDisposeFutureProvider<PlayerImage> {
 
   @override
   Override overrideWith(
-    FutureOr<PlayerImage> Function(PlayerImageRef provider) create,
+    FutureOr<Option<PlayerImage>> Function(PlayerImageRef provider) create,
   ) {
     return ProviderOverride(
       origin: this,
@@ -112,7 +113,7 @@ class PlayerImageProvider extends AutoDisposeFutureProvider<PlayerImage> {
   }
 
   @override
-  AutoDisposeFutureProviderElement<PlayerImage> createElement() {
+  AutoDisposeFutureProviderElement<Option<PlayerImage>> createElement() {
     return _PlayerImageProviderElement(this);
   }
 
@@ -132,13 +133,13 @@ class PlayerImageProvider extends AutoDisposeFutureProvider<PlayerImage> {
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin PlayerImageRef on AutoDisposeFutureProviderRef<PlayerImage> {
+mixin PlayerImageRef on AutoDisposeFutureProviderRef<Option<PlayerImage>> {
   /// The parameter `player` of this provider.
   Player get player;
 }
 
 class _PlayerImageProviderElement
-    extends AutoDisposeFutureProviderElement<PlayerImage>
+    extends AutoDisposeFutureProviderElement<Option<PlayerImage>>
     with PlayerImageRef {
   _PlayerImageProviderElement(super.provider);
 

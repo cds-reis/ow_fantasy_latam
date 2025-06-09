@@ -23,7 +23,7 @@ final seasonProvider = AutoDisposeFutureProvider<IList<Season>>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef SeasonRef = AutoDisposeFutureProviderRef<IList<Season>>;
-String _$selectedSeasonHash() => r'acba1f4a2f0c63086ed12d94588f9471094833ea';
+String _$selectedSeasonHash() => r'09a078cdceb6523493f19eb8c31cc25f5058e6cc';
 
 /// See also [SelectedSeason].
 @ProviderFor(SelectedSeason)

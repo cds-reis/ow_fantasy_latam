@@ -7,7 +7,7 @@ part of 'player_submition_status_provider.dart';
 // **************************************************************************
 
 String _$playerSubmitionStatusHash() =>
-    r'5b28862a4c22c8144cbba224da87b569b636bfca';
+    r'69a63212e328b413c0f66bcbb0020822b5cf37d6';
 
 /// Copied from Dart SDK
 class _SystemHash {

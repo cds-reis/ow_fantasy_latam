@@ -6,7 +6,7 @@ part of 'submit_user_roster_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$submitUserRosterHash() => r'a639bb9741e766d1b6c965d1f981a5842281bc1f';
+String _$submitUserRosterHash() => r'0415c106d6ffb7b8fbe6a0076f41c7a278bda14b';
 
 /// Copied from Dart SDK
 class _SystemHash {

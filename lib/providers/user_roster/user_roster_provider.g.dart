@@ -6,6 +6,26 @@ part of 'user_roster_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
+String _$originalUserRosterHash() =>
+    r'9bf074609323923f36923a90df351b0708da7bbb';
+
+/// See also [OriginalUserRoster].
+@ProviderFor(OriginalUserRoster)
+final originalUserRosterProvider =
+    AutoDisposeNotifierProvider<
+      OriginalUserRoster,
+      IMap<SeasonId, Roster>
+    >.internal(
+      OriginalUserRoster.new,
+      name: r'originalUserRosterProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$originalUserRosterHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+typedef _$OriginalUserRoster = AutoDisposeNotifier<IMap<SeasonId, Roster>>;
 String _$userRosterExistsHash() => r'30c3ffddd85bb392095ea6deb1a3e824560f940a';
 
 /// Copied from Dart SDK
@@ -157,7 +177,7 @@ class _UserRosterExistsProviderElement
   SeasonId get seasonId => (origin as UserRosterExistsProvider).seasonId;
 }
 
-String _$userRosterHash() => r'8159795c6b796523dd24b88ea79b8c26253eaa71';
+String _$userRosterHash() => r'bd4797efceacd57659d49efed5e9ec994bd89dee';
 
 abstract class _$UserRoster extends BuildlessAutoDisposeAsyncNotifier<Roster> {
   late final SeasonId seasonId;
