@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../../entities/player/player.dart';
-import '../../../../providers/season_provider.dart';
-import '../../../../providers/user_roster/user_roster_provider.dart';
+import '../../../../../entities/player/player.dart';
+import '../../../../../providers/season_provider.dart';
+import '../../../../../providers/user_roster/user_roster_provider.dart';
 
 class RemovePlayerFromRosterButton extends ConsumerWidget {
   const RemovePlayerFromRosterButton({required this.player, super.key});

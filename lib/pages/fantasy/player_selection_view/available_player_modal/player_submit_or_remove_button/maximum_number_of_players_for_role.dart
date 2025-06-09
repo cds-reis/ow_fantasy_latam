@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../entities/player/player_role.dart';
+
+import '../../../../../entities/player/player_role.dart';
 
 class MaximumNumberOfPlayersForRole extends StatelessWidget {
   const MaximumNumberOfPlayersForRole({required this.role, super.key});
