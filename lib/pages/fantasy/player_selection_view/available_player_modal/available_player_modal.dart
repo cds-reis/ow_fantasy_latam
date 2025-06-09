@@ -9,6 +9,7 @@ import '../../../../providers/user_roster/user_roster_provider.dart';
 import '../../../../widgets/player_role_icon.dart';
 import 'add_player_to_roster_button.dart';
 import 'maximum_number_of_players_for_role.dart';
+import 'player_image_display.dart';
 import 'player_is_playing_right_now.dart';
 import 'player_matches.dart';
 import 'player_matches_header.dart';
@@ -54,7 +55,7 @@ class AvailablePlayerModal extends ConsumerWidget {
               child: Column(
                 spacing: 24,
                 children: [
-                  const SizedBox.square(dimension: 300, child: Placeholder()),
+                  PlayerImageDisplay(player: player),
                   switch (()) {
                     _ when matches.isLoading => const SizedBox(
                       width: double.infinity,
