@@ -12,7 +12,7 @@ part 'season_provider.g.dart';
 @riverpod
 class SelectedSeason extends _$SelectedSeason {
   @override
-  Season build() => Season(id: SeasonId(1), name: 'Season 5 Master');
+  Season build() => const Season(id: SeasonId(1), name: 'Season 5 Master');
 
   // ignore: use_setters_to_change_properties, //
   void selectSeason(Season season) {

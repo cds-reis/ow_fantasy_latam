@@ -44,6 +44,8 @@ class RosterMapper extends ClassMapperBase<Roster> {
   static TransfersAmount _$transfers(Roster v) => v.transfers;
   static const Field<Roster, TransfersAmount> _f$transfers =
       Field('transfers', _$transfers);
+  static int _$budget(Roster v) => v.budget;
+  static const Field<Roster, int> _f$budget = Field('budget', _$budget);
 
   @override
   final MappableFields<Roster> fields = const {
@@ -55,6 +57,7 @@ class RosterMapper extends ClassMapperBase<Roster> {
     #seasonId: _f$seasonId,
     #totalScore: _f$totalScore,
     #transfers: _f$transfers,
+    #budget: _f$budget,
   };
 
   static Roster _instantiate(DecodingData data) {
@@ -66,7 +69,8 @@ class RosterMapper extends ClassMapperBase<Roster> {
         secondSupport: data.dec(_f$secondSupport),
         seasonId: data.dec(_f$seasonId),
         totalScore: data.dec(_f$totalScore),
-        transfers: data.dec(_f$transfers));
+        transfers: data.dec(_f$transfers),
+        budget: data.dec(_f$budget));
   }
 
   @override
@@ -128,7 +132,8 @@ abstract class RosterCopyWith<$R, $In extends Roster, $Out>
       Player? secondSupport,
       SeasonId? seasonId,
       double? totalScore,
-      TransfersAmount? transfers});
+      TransfersAmount? transfers,
+      int? budget});
   RosterCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -162,7 +167,8 @@ class _RosterCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Roster, $Out>
           Object? secondSupport = $none,
           SeasonId? seasonId,
           double? totalScore,
-          TransfersAmount? transfers}) =>
+          TransfersAmount? transfers,
+          int? budget}) =>
       $apply(FieldCopyWithData({
         if (tank != $none) #tank: tank,
         if (firstDamage != $none) #firstDamage: firstDamage,
@@ -171,7 +177,8 @@ class _RosterCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Roster, $Out>
         if (secondSupport != $none) #secondSupport: secondSupport,
         if (seasonId != null) #seasonId: seasonId,
         if (totalScore != null) #totalScore: totalScore,
-        if (transfers != null) #transfers: transfers
+        if (transfers != null) #transfers: transfers,
+        if (budget != null) #budget: budget
       }));
   @override
   Roster $make(CopyWithData data) => Roster(
@@ -182,7 +189,8 @@ class _RosterCopyWithImpl<$R, $Out> extends ClassCopyWithBase<$R, Roster, $Out>
       secondSupport: data.get(#secondSupport, or: $value.secondSupport),
       seasonId: data.get(#seasonId, or: $value.seasonId),
       totalScore: data.get(#totalScore, or: $value.totalScore),
-      transfers: data.get(#transfers, or: $value.transfers));
+      transfers: data.get(#transfers, or: $value.transfers),
+      budget: data.get(#budget, or: $value.budget));
 
   @override
   RosterCopyWith<$R2, Roster, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t) =>

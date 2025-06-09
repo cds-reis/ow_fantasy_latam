@@ -21,17 +21,14 @@ class FantasyPage extends StatelessWidget {
           Row(
             spacing: 24,
             children: [
-              Expanded(
-                flex: 8,
-                child: Text(
-                  'Your Face It LATAM Fantasy Team'.hardString,
-                  style: const TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                  ),
+              Text(
+                'Your Face It LATAM Fantasy Team'.hardString,
+                style: const TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
-              const Flexible(flex: 2, child: SeasonSelector()),
+              const SizedBox(width: 300, child: SeasonSelector()),
             ],
           ),
           const Row(

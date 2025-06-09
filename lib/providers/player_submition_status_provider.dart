@@ -6,7 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../entities/match/match.dart';
 import '../entities/player/player.dart';
 import '../entities/roster/roster.dart';
-import 'supabase_provider.dart';
+import 'roster_deadline_provider.dart';
 
 part 'player_submition_status_provider.g.dart';
 
@@ -15,22 +15,14 @@ Future<PlayerSubmitionStatus> playerSubmitionStatus(
   Ref ref,
   PlayerSubmitionRequest request,
 ) async {
-  final supabase = ref.watch(supabaseProvider);
-  final response = await supabase.functions.invoke(
-    'get-roster-submition-deadline',
-  );
+  final deadline = await ref.watch(rosterDeadlineProvider.future);
 
-  final isPastDeadline =
-      (response.data as Map<String, dynamic>)['is_past_deadline'] as bool;
-
-  if (isPastDeadline) {
+  if (deadline.isPastDeadline) {
     return PlayerSubmitionStatus.rosterSubmitionDeadlineReached;
   }
 
   final roster = request.roster;
-  final now = DateTime.parse(
-    (response.data as Map<String, dynamic>)['now'] as String,
-  );
+  final now = deadline.now;
 
   final weekMonday = now
       .subtract(Duration(days: now.weekday - 1))

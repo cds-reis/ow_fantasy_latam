@@ -25,3 +25,12 @@ final class RosterIsNotFullException extends RosterCreationException {
   String get message =>
       'Your roster is not full. Please add all players to your roster';
 }
+
+final class RosterIsTheSameAsTheOriginalOneException
+    extends RosterCreationException {
+  const RosterIsTheSameAsTheOriginalOneException();
+
+  @override
+  String get message =>
+      'You cannot submit the same roster as the original one.';
+}

@@ -13,10 +13,8 @@ part 'submit_user_roster_provider.g.dart';
 Future<void> submitUserRoster(Ref ref, Roster roster) async {
   final supabase = ref.watch(supabaseProvider);
 
-  final user = supabase.auth.currentUser!;
   final seasonId = roster.seasonId;
 
-  final table = supabase.from('fantasy_rosters');
   final exists = ref.watch(userRosterExistsProvider(seasonId));
 
   if (!roster.isFull) {
@@ -30,6 +28,10 @@ Future<void> submitUserRoster(Ref ref, Roster roster) async {
     ?roster.firstSupport?.id,
     ?roster.secondSupport?.id,
   ];
+
+  if (ref.watch(originalUserRosterProvider)[seasonId] == roster) {
+    throw const RosterIsTheSameAsTheOriginalOneException();
+  }
 
   if (ids.toSet().length != ids.length) {
     throw const SamePlayersInTheTeamException();
@@ -55,19 +57,19 @@ Future<void> submitUserRoster(Ref ref, Roster roster) async {
 
     ref.invalidate(userRosterProvider(seasonId));
   } else {
-    await table.insert({
-      'id': user.id,
-      'season_id': seasonId.value,
-      'tank_id': roster.tank?.id,
-      'first_dps_id': roster.firstDamage?.id,
-      'second_dps_id': roster.secondDamage?.id,
-      'first_support_id': roster.firstSupport?.id,
-      'second_support_id': roster.secondSupport?.id,
-    });
-
-    await supabase.from('fantasy_roster_details').insert({
-      'id': user.id,
-      'season_id': seasonId.value,
-    });
+    await supabase.functions.invoke(
+      'create-user-roster',
+      queryParameters: {'season_id': seasonId.value.toString()},
+      body: {
+        'tank_id': roster.tank?.id,
+        'first_dps_id': roster.firstDamage?.id,
+        'second_dps_id': roster.secondDamage?.id,
+        'first_support_id': roster.firstSupport?.id,
+        'second_support_id': roster.secondSupport?.id,
+      },
+    );
+    ref.read(userRosterExistsProvider(seasonId).notifier).set(exists: true);
+    final newRoster = await ref.refresh(userRosterProvider(seasonId).future);
+    ref.read(originalUserRosterProvider.notifier).add(newRoster);
   }
 }
