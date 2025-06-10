@@ -1,4 +1,3 @@
-import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -6,34 +5,10 @@ import '../../entities/player/player.dart';
 import '../../entities/roster/roster.dart';
 import '../../entities/season/season_id.dart';
 import '../supabase_provider.dart';
+import 'original_user_roster.dart';
+import 'user_roster_exists.dart';
 
 part 'user_roster_provider.g.dart';
-
-@riverpod
-class OriginalUserRoster extends _$OriginalUserRoster {
-  @override
-  IMap<SeasonId, Roster> build() {
-    ref.keepAlive();
-    return const IMap.empty();
-  }
-
-  void add(Roster roster) {
-    state = state.add(roster.seasonId, roster);
-  }
-}
-
-@riverpod
-class UserRosterExists extends _$UserRosterExists {
-  @override
-  bool build(SeasonId seasonId) {
-    ref.keepAlive();
-    return false;
-  }
-
-  void set({required bool exists}) {
-    state = exists;
-  }
-}
 
 @riverpod
 class UserRoster extends _$UserRoster {
@@ -52,9 +27,10 @@ class UserRoster extends _$UserRoster {
 
     final mapRoster = response.data as Map<String, dynamic>;
 
-    if (mapRoster['tank'] == null) {
+    if (mapRoster['exists'] == false) {
       final roster = Roster.empty(seasonId: seasonId);
       ref.read(originalUserRosterProvider.notifier).add(roster);
+      ref.read(userRosterExistsProvider(seasonId).notifier).set(exists: false);
       return roster;
     }
 

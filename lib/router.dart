@@ -62,10 +62,16 @@ final router = GoRouter(
 
 Widget _shellBuilder(BuildContext context, GoRouterState state, Widget child) {
   return Scaffold(
-    appBar: FantasyAppBar(),
-    body: SingleChildScrollView(
-      padding: const EdgeInsets.all(24),
-      child: child,
+    body: Column(
+      children: [
+        const FantasyAppBar(),
+        Expanded(
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(24),
+            child: child,
+          ),
+        ),
+      ],
     ),
   );
 }
