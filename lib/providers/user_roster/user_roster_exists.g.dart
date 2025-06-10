@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_roster_provider.dart';
+part of 'user_roster_exists.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$userRosterHash() => r'8c62576c176f4bf48169105847899cdb256ef1b2';
+String _$userRosterExistsHash() => r'30c3ffddd85bb392095ea6deb1a3e824560f940a';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -29,29 +29,29 @@ class _SystemHash {
   }
 }
 
-abstract class _$UserRoster extends BuildlessAutoDisposeAsyncNotifier<Roster> {
+abstract class _$UserRosterExists extends BuildlessAutoDisposeNotifier<bool> {
   late final SeasonId seasonId;
 
-  FutureOr<Roster> build(SeasonId seasonId);
+  bool build(SeasonId seasonId);
 }
 
-/// See also [UserRoster].
-@ProviderFor(UserRoster)
-const userRosterProvider = UserRosterFamily();
+/// See also [UserRosterExists].
+@ProviderFor(UserRosterExists)
+const userRosterExistsProvider = UserRosterExistsFamily();
 
-/// See also [UserRoster].
-class UserRosterFamily extends Family<AsyncValue<Roster>> {
-  /// See also [UserRoster].
-  const UserRosterFamily();
+/// See also [UserRosterExists].
+class UserRosterExistsFamily extends Family<bool> {
+  /// See also [UserRosterExists].
+  const UserRosterExistsFamily();
 
-  /// See also [UserRoster].
-  UserRosterProvider call(SeasonId seasonId) {
-    return UserRosterProvider(seasonId);
+  /// See also [UserRosterExists].
+  UserRosterExistsProvider call(SeasonId seasonId) {
+    return UserRosterExistsProvider(seasonId);
   }
 
   @override
-  UserRosterProvider getProviderOverride(
-    covariant UserRosterProvider provider,
+  UserRosterExistsProvider getProviderOverride(
+    covariant UserRosterExistsProvider provider,
   ) {
     return call(provider.seasonId);
   }
@@ -68,27 +68,28 @@ class UserRosterFamily extends Family<AsyncValue<Roster>> {
       _allTransitiveDependencies;
 
   @override
-  String? get name => r'userRosterProvider';
+  String? get name => r'userRosterExistsProvider';
 }
 
-/// See also [UserRoster].
-class UserRosterProvider
-    extends AutoDisposeAsyncNotifierProviderImpl<UserRoster, Roster> {
-  /// See also [UserRoster].
-  UserRosterProvider(SeasonId seasonId)
+/// See also [UserRosterExists].
+class UserRosterExistsProvider
+    extends AutoDisposeNotifierProviderImpl<UserRosterExists, bool> {
+  /// See also [UserRosterExists].
+  UserRosterExistsProvider(SeasonId seasonId)
     : this._internal(
-        () => UserRoster()..seasonId = seasonId,
-        from: userRosterProvider,
-        name: r'userRosterProvider',
+        () => UserRosterExists()..seasonId = seasonId,
+        from: userRosterExistsProvider,
+        name: r'userRosterExistsProvider',
         debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
             ? null
-            : _$userRosterHash,
-        dependencies: UserRosterFamily._dependencies,
-        allTransitiveDependencies: UserRosterFamily._allTransitiveDependencies,
+            : _$userRosterExistsHash,
+        dependencies: UserRosterExistsFamily._dependencies,
+        allTransitiveDependencies:
+            UserRosterExistsFamily._allTransitiveDependencies,
         seasonId: seasonId,
       );
 
-  UserRosterProvider._internal(
+  UserRosterExistsProvider._internal(
     super._createNotifier, {
     required super.name,
     required super.dependencies,
@@ -101,15 +102,15 @@ class UserRosterProvider
   final SeasonId seasonId;
 
   @override
-  FutureOr<Roster> runNotifierBuild(covariant UserRoster notifier) {
+  bool runNotifierBuild(covariant UserRosterExists notifier) {
     return notifier.build(seasonId);
   }
 
   @override
-  Override overrideWith(UserRoster Function() create) {
+  Override overrideWith(UserRosterExists Function() create) {
     return ProviderOverride(
       origin: this,
-      override: UserRosterProvider._internal(
+      override: UserRosterExistsProvider._internal(
         () => create()..seasonId = seasonId,
         from: from,
         name: null,
@@ -122,13 +123,13 @@ class UserRosterProvider
   }
 
   @override
-  AutoDisposeAsyncNotifierProviderElement<UserRoster, Roster> createElement() {
-    return _UserRosterProviderElement(this);
+  AutoDisposeNotifierProviderElement<UserRosterExists, bool> createElement() {
+    return _UserRosterExistsProviderElement(this);
   }
 
   @override
   bool operator ==(Object other) {
-    return other is UserRosterProvider && other.seasonId == seasonId;
+    return other is UserRosterExistsProvider && other.seasonId == seasonId;
   }
 
   @override
@@ -142,18 +143,18 @@ class UserRosterProvider
 
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
-mixin UserRosterRef on AutoDisposeAsyncNotifierProviderRef<Roster> {
+mixin UserRosterExistsRef on AutoDisposeNotifierProviderRef<bool> {
   /// The parameter `seasonId` of this provider.
   SeasonId get seasonId;
 }
 
-class _UserRosterProviderElement
-    extends AutoDisposeAsyncNotifierProviderElement<UserRoster, Roster>
-    with UserRosterRef {
-  _UserRosterProviderElement(super.provider);
+class _UserRosterExistsProviderElement
+    extends AutoDisposeNotifierProviderElement<UserRosterExists, bool>
+    with UserRosterExistsRef {
+  _UserRosterExistsProviderElement(super.provider);
 
   @override
-  SeasonId get seasonId => (origin as UserRosterProvider).seasonId;
+  SeasonId get seasonId => (origin as UserRosterExistsProvider).seasonId;
 }
 
 // ignore_for_file: type=lint

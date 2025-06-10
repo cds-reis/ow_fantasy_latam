@@ -83,7 +83,7 @@ class AboutPage extends StatelessWidget {
                             ),
                             WidgetSpan(
                               child: Link(
-                                uri: Uri.parse('https://x.com/TotallyNotToby1'),
+                                uri: Uri.parse('https://x.com/RafinhaOLindao'),
                                 builder: (context, child) {
                                   return InkWell(
                                     onTap: () {

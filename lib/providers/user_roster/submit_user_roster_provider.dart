@@ -4,6 +4,8 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../entities/exceptions/roster_creation_exception.dart';
 import '../../entities/roster/roster.dart';
 import '../supabase_provider.dart';
+import 'original_user_roster.dart';
+import 'user_roster_exists.dart';
 import 'user_roster_provider.dart';
 import 'user_transfers_provider.dart';
 
