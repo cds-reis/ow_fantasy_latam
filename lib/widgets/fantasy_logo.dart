@@ -5,8 +5,8 @@ class FantasyLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Image.asset(
-      'images/cartola_ow.webp',
+    return Image.network(
+      'https://hqhudvgihomrtesqkiww.supabase.co/storage/v1/object/public/logos//cartola_branco.webp',
       height: 48,
     );
   }
