@@ -6,6 +6,7 @@ import 'package:gap/gap.dart';
 import '../../../../entities/match/match.dart';
 import '../../../../entities/match/player_score.dart';
 import '../../../../entities/player/player.dart';
+import '../../../../utils/build_context_extensions.dart';
 import 'player_match_item.dart';
 
 class PlayerMatches extends ConsumerStatefulWidget {
@@ -19,9 +20,6 @@ class PlayerMatches extends ConsumerStatefulWidget {
 }
 
 class _TeamMatchesState extends ConsumerState<PlayerMatches> {
-  int page = 0;
-  static const pageSize = 10;
-
   @override
   Widget build(BuildContext context) {
     final matches = widget.matches;
@@ -39,9 +37,30 @@ class _TeamMatchesState extends ConsumerState<PlayerMatches> {
 
     final matchesToShow = matches.requireValue
         .where((match) => match.isCompleted)
-        .skip(page * pageSize)
-        .take(pageSize)
         .toList();
+
+    if (context.isMobile) {
+      return Column(
+        children: [
+          for (final match in matchesToShow) ...[
+            TeamMatchItem(
+              match: match,
+              playerScore: PlayerScore(
+                playerId: widget.player.id,
+                score: match.playerScores
+                    .firstWhere(
+                      (e) => e.playerId == widget.player.id,
+                      orElse: () =>
+                          PlayerScore(playerId: widget.player.id, score: 0),
+                    )
+                    .score,
+              ),
+            ),
+            if (match != matchesToShow.last) const Gap(16),
+          ],
+        ],
+      );
+    }
 
     return ListView.separated(
       itemCount: matchesToShow.length,

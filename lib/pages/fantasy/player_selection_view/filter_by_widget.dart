@@ -10,6 +10,7 @@ part 'filter_by_widget.g.dart';
 class FilterBy extends _$FilterBy {
   @override
   PlayerSelectionFilter? build() {
+    ref.keepAlive();
     return null;
   }
 

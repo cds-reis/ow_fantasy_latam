@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../providers/season_provider.dart';
+import '../../utils/build_context_extensions.dart';
 import '../../utils/hardstring.dart';
 import 'player_selection_view/player_selection_view.dart';
 import 'your_team_view/your_team_view.dart';
@@ -18,8 +19,10 @@ class FantasyPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         spacing: 24,
         children: [
-          Row(
+          Wrap(
             spacing: 24,
+            runSpacing: 16,
+            alignment: WrapAlignment.center,
             children: [
               Text(
                 'Your Face It LATAM Fantasy Team'.hardString,
@@ -28,15 +31,16 @@ class FantasyPage extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(width: 300, child: SeasonSelector()),
+              const SizedBox(width: 180, child: SeasonSelector()),
             ],
           ),
-          const Row(
+          Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             spacing: 24,
             children: [
-              Expanded(flex: 65, child: YourTeamView()),
-              Expanded(flex: 35, child: PlayerSelectionView()),
+              const Expanded(flex: 65, child: YourTeamView()),
+              if (!context.isMobile)
+                const Expanded(flex: 35, child: PlayerSelectionView()),
             ],
           ),
         ],

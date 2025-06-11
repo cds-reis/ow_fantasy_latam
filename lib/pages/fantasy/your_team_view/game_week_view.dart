@@ -134,6 +134,7 @@ class GameWeekItem extends StatelessWidget {
                 fontSize: 16,
                 color: highlighted ? Colors.black : Colors.white,
               ),
+              textAlign: TextAlign.center,
             ),
           ),
         ),

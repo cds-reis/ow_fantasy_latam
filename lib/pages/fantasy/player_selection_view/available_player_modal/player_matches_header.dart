@@ -8,7 +8,7 @@ class PlayerMatchesHeader extends StatelessWidget {
     return const Row(
       children: [
         Expanded(
-          flex: 35,
+          flex: 30,
           child: Text(
             'Team 1',
             textAlign: TextAlign.center,
@@ -16,7 +16,7 @@ class PlayerMatchesHeader extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 10,
+          flex: 20,
           child: Text(
             'Result',
             textAlign: TextAlign.center,
@@ -24,7 +24,7 @@ class PlayerMatchesHeader extends StatelessWidget {
           ),
         ),
         Expanded(
-          flex: 35,
+          flex: 30,
           child: Text(
             'Team 2',
             textAlign: TextAlign.center,

@@ -18,4 +18,9 @@ extension BuildContextExtensions on BuildContext {
       ),
     );
   }
+
+  double get width => MediaQuery.sizeOf(this).width;
+  double get height => MediaQuery.sizeOf(this).height;
+  double get mobileBreakpoint => 1279;
+  bool get isMobile => width <= mobileBreakpoint;
 }
