@@ -40,10 +40,67 @@
 
   <title>OW Fantasy - LATAM</title>
   <link rel="manifest" href="manifest.json">
+  <style>
+    body {
+      background-color: #141218;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .loading-container {
+      text-align: center;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    @keyframes breathing {
+      0% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.1);
+      }
+      100% {
+        transform: scale(1);
+      }
+    }
+
+    .loading-image {
+      width: 200px;
+      height: auto;
+      margin-bottom: 20px;
+      animation: breathing 3s ease-in-out infinite;
+    }
+  </style>
 </head>
 
 <body>
-  <script src="flutter_bootstrap.js" async></script>
+  <script>
+    {{flutter_js}}
+    {{flutter_build_config}}
+
+    const loadingContainer = document.createElement('div');
+    loadingContainer.className = 'loading-container';
+    
+    const loadingImage = document.createElement('img');
+    loadingImage.src = 'cartola_ow.webp';
+    loadingImage.className = 'loading-image';
+    loadingImage.alt = 'Loading...';
+    
+    loadingContainer.appendChild(loadingImage);
+    document.body.appendChild(loadingContainer);
+
+    _flutter.loader.load({
+      onEntrypointLoaded: async function (engineInitializer) {
+        const appRunner = await engineInitializer.initializeEngine();
+
+        await appRunner.runApp();
+      }
+    });
+  </script>
 </body>
 
 </html>
