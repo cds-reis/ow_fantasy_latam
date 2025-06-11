@@ -89,7 +89,7 @@ class AboutPage extends StatelessWidget {
                                     onTap: () {
                                       launchUrl(
                                         Uri.parse(
-                                          'https://x.com/TotallyNotToby1',
+                                          'https://x.com/RafinhaOLindao',
                                         ),
                                       );
                                     },
