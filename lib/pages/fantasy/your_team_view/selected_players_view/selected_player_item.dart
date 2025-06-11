@@ -98,35 +98,36 @@ class SelectedPlayerItem extends ConsumerWidget {
                 },
                 child: Row(
                   children: [
-                    Expanded(
-                      flex: 2,
-                      child: Material(
-                        borderRadius: const BorderRadius.horizontal(
-                          left: Radius.circular(16),
-                        ),
-                        color: Colors.black45,
-                        child: Consumer(
-                          builder: (context, ref, child) {
-                            final player = this.player;
-                            if (player == null) {
-                              return const SizedBox.shrink();
-                            }
+                    if (!context.isMobile)
+                      Expanded(
+                        flex: 2,
+                        child: Material(
+                          borderRadius: const BorderRadius.horizontal(
+                            left: Radius.circular(16),
+                          ),
+                          color: Colors.black45,
+                          child: Consumer(
+                            builder: (context, ref, child) {
+                              final player = this.player;
+                              if (player == null) {
+                                return const SizedBox.shrink();
+                              }
 
-                            final image = ref.watch(
-                              playerImageProvider(player),
-                            );
+                              final image = ref.watch(
+                                playerImageProvider(player),
+                              );
 
-                            return switch (image) {
-                              AsyncValue(value: Some(:final value)) =>
-                                Image.memory(value),
-                              _ => const SizedBox(
-                                // height: double.infinity,
-                              ),
-                            };
-                          },
+                              return switch (image) {
+                                AsyncValue(value: Some(:final value)) =>
+                                  Image.memory(value),
+                                _ => const SizedBox(
+                                  // height: double.infinity,
+                                ),
+                              };
+                            },
+                          ),
                         ),
                       ),
-                    ),
                     Expanded(
                       flex: 8,
                       child: Padding(
