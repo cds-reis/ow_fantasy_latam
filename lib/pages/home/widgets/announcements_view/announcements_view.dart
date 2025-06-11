@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../../../utils/build_context_extensions.dart';
-
 class AnnouncementsView extends StatelessWidget {
   const AnnouncementsView({super.key});
 
@@ -17,8 +15,7 @@ class AnnouncementsView extends StatelessWidget {
           'We added support for mobile devices!',
           style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
         ),
-        Flex(
-          direction: context.isMobile ? Axis.vertical : Axis.horizontal,
+        Column(
           mainAxisAlignment: MainAxisAlignment.center,
           spacing: 8,
           children: [
