@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 
 import '../pages/about/about_page.dart';
 import '../pages/fantasy/fantasy_page.dart';
@@ -52,54 +53,54 @@ class FantasyAppBar extends StatelessWidget {
       );
     }
 
-    return ColoredBox(
-      color: Colors.black,
+    return DecoratedBox(
+      decoration: const BoxDecoration(
+        color: Colors.black,
+        border: Border(
+          bottom: BorderSide(color: Colors.white),
+        ),
+      ),
       child: Row(
+        spacing: 16,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Row(
-              spacing: 16,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Row(
-                  spacing: 8,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.symmetric(vertical: 16),
-                      child: FantasyLogo(),
-                    ),
-                    Text(
-                      'OW Fantasy - LATAM',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 24,
-                      ),
-                    ),
-                  ],
+          const Row(
+            spacing: 8,
+            children: [
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 16),
+                child: FantasyLogo(),
+              ),
+              Text(
+                'OW Fantasy - LATAM',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 24,
                 ),
-                NavigationTextButton.appBar(
-                  title: 'Home'.hardString,
-                  route: HomePage.routeName,
-                ),
-                NavigationTextButton.appBar(
-                  title: 'My Team'.hardString,
-                  route: FantasyPage.routeName,
-                ),
-                NavigationTextButton.appBar(
-                  title: 'Leaderboard'.hardString,
-                  route: LeaderboardPage.routeName,
-                ),
-                NavigationTextButton.appBar(
-                  title: 'About'.hardString,
-                  route: AboutPage.routeName,
-                ),
-                NavigationTextButton.appBar(
-                  title: 'Help'.hardString,
-                  route: HelpPage.routeName,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
+          NavigationTextButton.appBar(
+            title: 'Home'.hardString,
+            route: HomePage.routeName,
+          ),
+          NavigationTextButton.appBar(
+            title: 'My Team'.hardString,
+            route: FantasyPage.routeName,
+          ),
+          NavigationTextButton.appBar(
+            title: 'Leaderboard'.hardString,
+            route: LeaderboardPage.routeName,
+          ),
+          NavigationTextButton.appBar(
+            title: 'About'.hardString,
+            route: AboutPage.routeName,
+          ),
+          NavigationTextButton.appBar(
+            title: 'Help'.hardString,
+            route: HelpPage.routeName,
+          ),
+          const Gap(48),
           const LoginButton(),
         ],
       ),

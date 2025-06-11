@@ -9,6 +9,7 @@ class AboutPage extends StatelessWidget {
 
   static const String routeName = '/about';
   static final Uri _twitterUrl = Uri.parse('https://x.com/RafinhaOLindao');
+  static final Uri _blankezzUrl = Uri.parse('https://x.com/Blankezz_');
 
   @override
   Widget build(BuildContext context) {
@@ -87,9 +88,7 @@ class AboutPage extends StatelessWidget {
                                 uri: _twitterUrl,
                                 builder: (context, child) {
                                   return InkWell(
-                                    onTap: () {
-                                      launchUrl(_twitterUrl);
-                                    },
+                                    onTap: () => launchUrl(_twitterUrl),
                                     child: const Text(
                                       'RafinhaOLindao',
                                       style: TextStyle(
@@ -110,14 +109,10 @@ class AboutPage extends StatelessWidget {
                             ),
                             WidgetSpan(
                               child: Link(
-                                uri: Uri.parse('https://x.com/Blankezz_'),
+                                uri: _blankezzUrl,
                                 builder: (context, child) {
                                   return InkWell(
-                                    onTap: () {
-                                      launchUrl(
-                                        Uri.parse('https://x.com/Blankezz_'),
-                                      );
-                                    },
+                                    onTap: () => launchUrl(_blankezzUrl),
                                     child: const Text(
                                       'Blankezz',
                                       style: TextStyle(

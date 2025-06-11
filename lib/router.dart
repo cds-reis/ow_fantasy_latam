@@ -11,6 +11,8 @@ import 'pages/home/home_page.dart';
 import 'pages/leaderboard/leaderboard_page.dart';
 import 'pages/login/login_page.dart';
 import 'pages/login/sign_up_page.dart';
+import 'pages/privacy/privacy_policy.dart';
+import 'pages/terms/terms_conditions.dart';
 import 'widgets/fantasy_app_bar.dart';
 import 'widgets/fantasy_drawer.dart';
 
@@ -55,6 +57,14 @@ final router = GoRouter(
         GoRoute(
           path: SignUpPage.routeName,
           pageBuilder: _pageBuilder(page: const SignUpPage()),
+        ),
+        GoRoute(
+          path: PrivacyPolicy.routeName,
+          pageBuilder: _pageBuilder(page: const PrivacyPolicy()),
+        ),
+        GoRoute(
+          path: TermsConditions.routeName,
+          pageBuilder: _pageBuilder(page: const TermsConditions()),
         ),
       ],
     ),

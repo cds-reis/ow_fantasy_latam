@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:fetch_client/fetch_client.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -7,21 +9,28 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:talker_flutter/talker_flutter.dart';
 import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
+import 'config/constants.dart' as constants;
 import 'router.dart';
-import 'utils/constants.dart';
 
 final Talker talker = TalkerFlutter.init();
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+void main() {
+  runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
 
-  usePathUrlStrategy();
+      usePathUrlStrategy();
 
-  await _setUpSupabase();
+      await _setUpSupabase();
 
-  _setUpLogging();
+      _setUpLogging();
 
-  runApp(const MyApp());
+      runApp(const MyApp());
+    },
+    (error, stackTrace) {
+      talker.error('Unhandled error', error, stackTrace);
+    },
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -58,23 +67,26 @@ void _setUpLogging() {
 Future<void> _setUpSupabase() async {
   final fetchClient = FetchClient(mode: RequestMode.cors);
 
-  if (supabaseUrl.isEmpty || supabaseAnonKey.isEmpty) {
-    talker.error('SUPABASE_URL or SUPABASE_ANON_KEY is not set');
-    throw Exception('SUPABASE_URL or SUPABASE_ANON_KEY is not set');
+  if (constants.supabaseUrl.isEmpty) {
+    talker.error('SUPABASE_URL is not set');
+    throw Exception('SUPABASE_URL is not set');
+  }
+
+  if (constants.supabaseAnonKey.isEmpty) {
+    talker.error('SUPABASE_ANON_KEY is not set');
+    throw Exception('SUPABASE_ANON_KEY is not set');
   }
 
   try {
-    talker.info('Initializing Supabase with URL: $supabaseUrl');
+    talker.info('Initializing Supabase with URL: ${constants.supabaseUrl}');
     await Supabase.initialize(
-      url: supabaseUrl,
-      anonKey: supabaseAnonKey,
+      url: constants.supabaseUrl,
+      anonKey: constants.supabaseAnonKey,
       httpClient: fetchClient,
     );
     talker.info('Supabase initialized successfully');
   } catch (e, stackTrace) {
-    talker
-      ..error('Failed to initialize Supabase: $e')
-      ..error('Stack trace: $stackTrace');
+    talker.error('Failed to initialize Supabase', e, stackTrace);
     rethrow;
   }
 }
