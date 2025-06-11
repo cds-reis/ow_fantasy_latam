@@ -6,6 +6,7 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 import '../../../../entities/player/player.dart';
 import '../../../../entities/player/player_image.dart';
 import '../../../../providers/supabase_provider.dart';
+import '../../../../utils/build_context_extensions.dart';
 
 part 'player_image_display.g.dart';
 
@@ -34,6 +35,13 @@ class PlayerImageDisplay extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final image = ref.watch(playerImageProvider(player));
+
+    if (context.isMobile) {
+      return switch (image) {
+        AsyncData(value: Some(:final value)) => Image.memory(value),
+        _ => const SizedBox.shrink(),
+      };
+    }
 
     return switch (image) {
       AsyncLoading() => const SizedBox.square(

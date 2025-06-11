@@ -60,7 +60,6 @@ class NextMatchesView extends StatelessWidget {
               error: (error, stackTrace) => Text(error.toString()),
               data: (matches) => Expanded(
                 child: ListView.separated(
-                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: matches.length,
                   itemBuilder: (context, index) {
                     return NextMatchItem(match: matches[index]);

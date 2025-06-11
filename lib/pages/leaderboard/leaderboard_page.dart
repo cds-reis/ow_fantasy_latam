@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../entities/leaderboard_entry.dart';
 import '../../providers/leaderboard_provider.dart';
+import '../../utils/build_context_extensions.dart';
 import 'leaderboard_users_view.dart';
 import 'user_rosters_view.dart';
 
@@ -27,7 +28,32 @@ class _LeaderboardPageState extends ConsumerState<LeaderboardPage> {
   }
 
   void onEntrySelected(LeaderboardEntry entry) {
-    this.entry.value = entry;
+    if (context.isMobile) {
+      showDialog<void>(
+        context: context,
+        builder: (context) {
+          return Dialog.fullscreen(
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: const Icon(Icons.close),
+                    ),
+                  ),
+                  UserRostersView(entry: entry),
+                ],
+              ),
+            ),
+          );
+        },
+      );
+    } else {
+      this.entry.value = entry;
+    }
   }
 
   @override
@@ -85,15 +111,16 @@ class _LeaderboardPageState extends ConsumerState<LeaderboardPage> {
                           },
                         ),
                       ),
-                      Expanded(
-                        flex: 6,
-                        child: ValueListenableBuilder(
-                          valueListenable: entry,
-                          builder: (_, entry, _) {
-                            return UserRostersView(entry: entry);
-                          },
+                      if (!context.isMobile)
+                        Expanded(
+                          flex: 6,
+                          child: ValueListenableBuilder(
+                            valueListenable: entry,
+                            builder: (_, entry, _) {
+                              return UserRostersView(entry: entry);
+                            },
+                          ),
                         ),
-                      ),
                     ],
                   ),
                 ),

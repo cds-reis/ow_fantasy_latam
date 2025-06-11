@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../utils/build_context_extensions.dart';
 import 'widgets/announcements_view/announcements_view.dart';
 import 'widgets/best_players_view/best_players_view.dart';
 import 'widgets/home_view_item.dart';
@@ -12,15 +13,19 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SingleChildScrollView(
+    final isMobile = context.isMobile;
+
+    return SingleChildScrollView(
       child: SizedBox(
         height: 1200,
         child: Row(
           spacing: 24,
           children: [
-            Expanded(child: HomeViewItem(child: BestPlayersView())),
-            Expanded(child: HomeViewItem(child: AnnouncementsView())),
-            Expanded(child: HomeViewItem(child: NextMatchesView())),
+            if (!isMobile)
+              const Expanded(child: HomeViewItem(child: BestPlayersView())),
+            const Expanded(child: HomeViewItem(child: AnnouncementsView())),
+            if (!isMobile)
+              const Expanded(child: HomeViewItem(child: NextMatchesView())),
           ],
         ),
       ),

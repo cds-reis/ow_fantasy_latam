@@ -25,7 +25,7 @@ class TeamMatchItem extends StatelessWidget {
         child: Row(
           children: [
             Expanded(
-              flex: 35,
+              flex: 30,
               child: Text(
                 match.firstTeam.name,
                 textAlign: TextAlign.center,
@@ -33,7 +33,7 @@ class TeamMatchItem extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 10,
+              flex: 20,
               child: Text(
                 '${match.firstTeamScore ?? 0} : ${match.secondTeamScore ?? 0}',
                 textAlign: TextAlign.center,
@@ -41,7 +41,7 @@ class TeamMatchItem extends StatelessWidget {
               ),
             ),
             Expanded(
-              flex: 35,
+              flex: 30,
               child: Text(
                 match.secondTeam.name,
                 textAlign: TextAlign.center,
