@@ -77,7 +77,9 @@ class _LoginButtonChild extends StatelessWidget {
       onEnter: (event) => _tooltipController.showTooltip(immediately: true),
       onExit: (event) => _tooltipController.hideTooltip(immediately: false),
       child: TextButton(
-        onPressed: () {},
+        onPressed: () {
+          _tooltipController.showTooltip(immediately: true);
+        },
         child: Row(
           spacing: 8,
           children: [
