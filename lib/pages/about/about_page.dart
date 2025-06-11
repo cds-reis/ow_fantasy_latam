@@ -8,6 +8,7 @@ class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
   static const String routeName = '/about';
+  static final Uri _twitterUrl = Uri.parse('https://x.com/RafinhaOLindao');
 
   @override
   Widget build(BuildContext context) {
@@ -83,15 +84,11 @@ class AboutPage extends StatelessWidget {
                             ),
                             WidgetSpan(
                               child: Link(
-                                uri: Uri.parse('https://x.com/RafinhaOLindao'),
+                                uri: _twitterUrl,
                                 builder: (context, child) {
                                   return InkWell(
                                     onTap: () {
-                                      launchUrl(
-                                        Uri.parse(
-                                          'https://x.com/RafinhaOLindao',
-                                        ),
-                                      );
+                                      launchUrl(_twitterUrl);
                                     },
                                     child: const Text(
                                       'RafinhaOLindao',
