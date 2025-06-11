@@ -7,6 +7,8 @@ import '../pages/home/home_page.dart';
 import '../pages/leaderboard/leaderboard_page.dart';
 import '../pages/login/login_page.dart';
 import '../pages/login/sign_up_page.dart';
+import '../pages/privacy/privacy_policy.dart';
+import '../pages/terms/terms_conditions.dart';
 import '../utils/hardstring.dart';
 import 'fantasy_logo.dart';
 import 'navigation_text_button.dart';
@@ -21,6 +23,7 @@ class FantasyDrawer extends StatelessWidget {
         padding: const EdgeInsets.all(8),
         child: Column(
           spacing: 16,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Row(
               children: [
@@ -70,6 +73,15 @@ class FantasyDrawer extends StatelessWidget {
             NavigationTextButton.drawer(
               title: 'Sign Up'.hardString,
               route: SignUpPage.routeName,
+            ),
+            const Divider(),
+            NavigationTextButton.drawer(
+              title: 'Privacy Policy'.hardString,
+              route: PrivacyPolicy.routeName,
+            ),
+            NavigationTextButton.drawer(
+              title: 'Terms and Conditions'.hardString,
+              route: TermsConditions.routeName,
             ),
           ],
         ),
