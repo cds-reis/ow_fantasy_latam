@@ -6,7 +6,26 @@ part of 'filter_by_widget.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$filterByHash() => r'903a5e70785b20f8d75333ee5c103442edb45734';
+String _$availableFiltersHash() => r'3d080beef0820486bca884d38eb832db4abca836';
+
+/// See also [availableFilters].
+@ProviderFor(availableFilters)
+final availableFiltersProvider =
+    AutoDisposeFutureProvider<IList<PlayerSelectionFilter>>.internal(
+      availableFilters,
+      name: r'availableFiltersProvider',
+      debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+          ? null
+          : _$availableFiltersHash,
+      dependencies: null,
+      allTransitiveDependencies: null,
+    );
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AvailableFiltersRef =
+    AutoDisposeFutureProviderRef<IList<PlayerSelectionFilter>>;
+String _$filterByHash() => r'bbfbfab14d2aa2405e317abfde612bd4820a7e69';
 
 /// See also [FilterBy].
 @ProviderFor(FilterBy)

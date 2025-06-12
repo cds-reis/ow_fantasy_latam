@@ -74,33 +74,36 @@ class _LoginButtonChild extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (event) => _tooltipController.showTooltip(immediately: true),
-      onExit: (event) => _tooltipController.hideTooltip(immediately: false),
+      onEnter: (_) => _tooltipController.showTooltip(immediately: true),
+      onExit: (_) => _tooltipController.hideTooltip(immediately: false),
       child: TextButton(
         onPressed: () {
           _tooltipController.showTooltip(immediately: true);
         },
-        child: Row(
-          spacing: 8,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: [
-                Text(
-                  username ?? 'Login',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.all(4),
+          child: Row(
+            spacing: 8,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Text(
+                    username ?? 'Login',
+                    style: const TextStyle(
+                      fontSize: 14,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const Text(
-                  'User',
-                  style: TextStyle(fontSize: 14, color: Colors.white),
-                ),
-              ],
-            ),
-            const Icon(Icons.person, color: Colors.white),
-          ],
+                  const Text(
+                    'User',
+                    style: TextStyle(fontSize: 14, color: Colors.white),
+                  ),
+                ],
+              ),
+              const Icon(Icons.person, color: Colors.white),
+            ],
+          ),
         ),
       ),
     );
@@ -120,8 +123,8 @@ class _LoginButtonTooltipContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MouseRegion(
-      onEnter: (event) => _tooltipController.showTooltip(immediately: true),
-      onExit: (event) => _tooltipController.hideTooltip(immediately: false),
+      onEnter: (_) => _tooltipController.showTooltip(immediately: true),
+      onExit: (_) => _tooltipController.hideTooltip(immediately: false),
       child: SizedBox(
         width: 120,
         child: DecoratedBox(

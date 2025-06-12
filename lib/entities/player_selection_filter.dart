@@ -6,6 +6,8 @@ import 'team/team.dart';
 sealed class PlayerSelectionFilter extends Equatable {
   const PlayerSelectionFilter();
 
+  String get label;
+
   @override
   List<Object?> get props => [];
 }
@@ -22,6 +24,9 @@ final class FilterByRole extends PlayerSelectionFilter {
   final PlayerRole role;
 
   @override
+  String get label => role.title;
+
+  @override
   List<Object?> get props => [role];
 }
 
@@ -32,4 +37,7 @@ final class FilterByTeam extends PlayerSelectionFilter {
 
   @override
   List<Object?> get props => [team];
+
+  @override
+  String get label => team.name;
 }
