@@ -57,7 +57,7 @@ Future<IList<Player>> filteredAvailablePlayers(
     case FilterByRole():
       return (column: 'role', value: filter.role.name);
     case FilterByTeam():
-      throw UnimplementedError();
+      return (column: 'team_id', value: filter.team.id.toString());
   }
 }
 
