@@ -65,8 +65,6 @@ void _setUpLogging() {
 }
 
 Future<void> _setUpSupabase() async {
-  final fetchClient = FetchClient(mode: RequestMode.cors);
-
   if (constants.supabaseUrl.isEmpty) {
     talker.error('SUPABASE_URL is not set');
     throw Exception('SUPABASE_URL is not set');
@@ -82,7 +80,7 @@ Future<void> _setUpSupabase() async {
     await Supabase.initialize(
       url: constants.supabaseUrl,
       anonKey: constants.supabaseAnonKey,
-      httpClient: fetchClient,
+      httpClient: FetchClient(mode: RequestMode.cors),
     );
     talker.info('Supabase initialized successfully');
   } catch (e, stackTrace) {

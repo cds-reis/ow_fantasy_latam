@@ -7,10 +7,18 @@ import '../supabase_provider.dart';
 part 'is_user_backoffice_provider.g.dart';
 
 @riverpod
-Future<bool> isUserBackoffice(Ref ref) async {
+Stream<bool> isUserBackoffice(Ref ref) {
   final supabase = ref.watch(supabaseProvider);
 
-  return isUserBackofficeUseCase(supabase);
+  return supabase.auth.onAuthStateChange.asyncMap((event) async {
+    final user = event.session?.user;
+
+    if (user == null) {
+      return false;
+    }
+
+    return isUserBackofficeUseCase(supabase);
+  });
 }
 
 Future<bool> isUserBackofficeUseCase(SupabaseClient supabase) async {

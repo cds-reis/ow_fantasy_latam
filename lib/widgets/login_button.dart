@@ -4,12 +4,10 @@ import 'package:go_router/go_router.dart';
 import 'package:just_the_tooltip/just_the_tooltip.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-import '../pages/backoffice/backoffice_page.dart';
 import '../pages/login/login_page.dart';
 import '../pages/login/sign_up_page.dart';
 import '../pages/privacy/privacy_policy.dart';
 import '../pages/terms/terms_conditions.dart';
-import '../providers/backofiice/is_user_backoffice_provider.dart';
 import '../providers/supabase_provider.dart';
 import 'logout_provider.dart';
 
@@ -88,21 +86,12 @@ class _LoginButtonChild extends StatelessWidget {
           child: Row(
             spacing: 8,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    username ?? 'Login',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const Text(
-                    'User',
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ],
+              Text(
+                username ?? 'Login',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
               ),
               const Icon(Icons.person, color: Colors.white),
             ],
@@ -203,36 +192,6 @@ class _LoginButtonTooltipContent extends StatelessWidget {
                     },
                   ),
                 ],
-                if (_user != null)
-                  Consumer(
-                    builder: (context, ref, child) {
-                      final isUserBackoffice = ref.watch(
-                        isUserBackofficeProvider,
-                      );
-
-                      return switch (isUserBackoffice) {
-                        AsyncValue(value: true) => Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.stretch,
-                          spacing: 4,
-                          children: [
-                            const Divider(),
-                            TextButton(
-                              onPressed: () => context.pushReplacement(
-                                BackofficePage.routeName,
-                              ),
-                              child: const Text(
-                                'Backoffice',
-                                style: TextStyle(color: Colors.white),
-                              ),
-                            ),
-                          ],
-                        ),
-                        AsyncValue(value: null) => const SizedBox.shrink(),
-                        AsyncValue(value: false) => const SizedBox.shrink(),
-                      };
-                    },
-                  ),
               ],
             ),
           ),
