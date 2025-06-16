@@ -76,8 +76,6 @@ class Roster with RosterMappable, EquatableMixin {
     };
   }
 
-  bool get hasSpaceForTransfers => transfers.hasSpace;
-
   bool get onlyTwoOfSameTeam {
     final teams = [
       tank?.teamId,
@@ -174,6 +172,17 @@ class Roster with RosterMappable, EquatableMixin {
         budget: budget + player.cost,
       );
     }
+  }
+
+  int amountOfChanges(Roster other) {
+    return [
+      tank != other.tank,
+      firstDamage != other.firstDamage && firstDamage != other.secondDamage,
+      secondDamage != other.firstDamage && secondDamage != other.secondDamage,
+      firstSupport != other.firstSupport && firstSupport != other.secondSupport,
+      secondSupport != other.firstSupport &&
+          secondSupport != other.secondSupport,
+    ].fold(0, (sum, change) => sum + (change ? 1 : 0));
   }
 
   @override

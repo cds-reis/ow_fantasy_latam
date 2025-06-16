@@ -17,4 +17,15 @@ class OriginalUserRoster extends _$OriginalUserRoster {
   void add(Roster roster) {
     state = state.add(roster.seasonId, roster);
   }
+
+  int amountOfChanges(Roster newRoster) {
+    final seasonId = newRoster.seasonId;
+    final originalRoster = state[seasonId];
+
+    if (originalRoster == null) {
+      return 0;
+    }
+
+    return originalRoster.amountOfChanges(newRoster);
+  }
 }

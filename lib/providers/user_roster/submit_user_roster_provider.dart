@@ -41,7 +41,11 @@ Future<void> submitUserRoster(Ref ref, Roster roster) async {
 
   if (exists) {
     final transfers = await ref.watch(userTransfersProvider(seasonId).future);
-    if (!transfers.hasSpace) {
+    final amountOfChanges = ref
+        .watch(originalUserRosterProvider.notifier)
+        .amountOfChanges(roster);
+
+    if (!transfers.hasSpace(amountOfChanges)) {
       throw const NoTransfersAvailableException();
     }
 
