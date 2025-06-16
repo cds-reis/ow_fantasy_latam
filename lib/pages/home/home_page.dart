@@ -16,23 +16,34 @@ class HomePage extends StatelessWidget {
     final isMobile = context.isMobile;
 
     return SingleChildScrollView(
-      child: SizedBox(
-        height: 1200,
-        child: Row(
-          spacing: 24,
-          children: [
-            if (!isMobile)
-              const Expanded(child: HomeViewItem(child: BestPlayersView())),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        spacing: 24,
+        children: [
+          if (!isMobile)
             const Expanded(
+              child: SizedBox(
+                height: 1200,
+                child: HomeViewItem(child: BestPlayersView()),
+              ),
+            ),
+          const Expanded(
+            child: SizedBox(
+              height: 1800,
               child: HomeViewItem(
                 padding: EdgeInsets.only(top: 24),
                 child: AnnouncementsView(),
               ),
             ),
-            if (!isMobile)
-              const Expanded(child: HomeViewItem(child: NextMatchesView())),
-          ],
-        ),
+          ),
+          if (!isMobile)
+            const Expanded(
+              child: SizedBox(
+                height: 1200,
+                child: HomeViewItem(child: NextMatchesView()),
+              ),
+            ),
+        ],
       ),
     );
   }

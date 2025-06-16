@@ -17,7 +17,7 @@ import 'pages/login/login_page.dart';
 import 'pages/login/sign_up_page.dart';
 import 'pages/privacy/privacy_policy.dart';
 import 'pages/terms/terms_conditions.dart';
-import 'providers/backofiice/is_user_backoffice_provider.dart';
+import 'providers/roles/is_user_backoffice_provider.dart';
 import 'widgets/fantasy_app_bar.dart';
 import 'widgets/fantasy_drawer.dart';
 

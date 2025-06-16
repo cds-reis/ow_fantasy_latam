@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../pages/backoffice/backoffice_page.dart';
-import '../providers/backofiice/is_user_backoffice_provider.dart';
+import '../providers/roles/is_user_backoffice_provider.dart';
 
 class BackofficeButton extends ConsumerWidget {
   const BackofficeButton({super.key});

@@ -1,10 +1,12 @@
+import 'package:fast_immutable_collections/fast_immutable_collections.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
+import '../../entities/user/user_role.dart';
 import '../../entities/user/user_role_name.dart';
-import '../../providers/backofiice/get_user_roles.dart';
-import '../../providers/backofiice/is_user_backoffice_provider.dart';
+import '../../providers/roles/get_user_roles.dart';
+import '../../providers/roles/is_user_backoffice_provider.dart';
 import '../../widgets/page_content.dart';
 import '../error_page/error_page.dart';
 import 'announcements/announcements_page.dart';
@@ -49,30 +51,26 @@ class _BackofficePageState extends ConsumerState<BackofficePage> {
         title: 'Backoffice',
         spacing: 16,
         children: [
-          BackofficePageItem(
-            shouldShow: () {
-              return userRoles.any(
-                (role) => role.name == UserRoleName.playerScoreCreator,
-              );
-            },
-            title: 'Create Player Scores',
-            icon: Icons.add_chart_rounded,
-            routePath: CreatePlayerScoresPage.routePath,
-          ),
-          BackofficePageItem(
-            shouldShow: () {
-              return userRoles.any(
-                (role) => role.name == UserRoleName.announcementsCreator,
-              );
-            },
-            title: 'Announcements',
-            icon: Icons.announcement,
-            routePath: AnnouncementsPage.routePath,
-          ),
+          if (_shouldShow(userRoles, UserRoleName.playerScoreCreator))
+            const BackofficePageItem(
+              title: 'Create Player Scores',
+              icon: Icons.add_chart_rounded,
+              routePath: CreatePlayerScoresPage.routePath,
+            ),
+          if (_shouldShow(userRoles, UserRoleName.announcementsCreator))
+            const BackofficePageItem(
+              title: 'Announcements',
+              icon: Icons.announcement,
+              routePath: AnnouncementsPage.routePath,
+            ),
         ],
       ),
       error: (error, stack) => Text(error.toString()),
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
+}
+
+bool _shouldShow(IList<UserRole> userRoles, UserRoleName roleName) {
+  return userRoles.any((role) => role.name == roleName);
 }

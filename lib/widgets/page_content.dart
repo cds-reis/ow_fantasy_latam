@@ -6,6 +6,7 @@ class PageContent extends StatelessWidget {
     required this.children,
     this.showBackButton = false,
     this.spacing = 4,
+    this.width = 1200,
     super.key,
   });
 
@@ -13,6 +14,7 @@ class PageContent extends StatelessWidget {
   final List<Widget> children;
   final bool showBackButton;
   final double spacing;
+  final double width;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +25,7 @@ class PageContent extends StatelessWidget {
       children: [
         if (showBackButton) const BackButton(),
         SizedBox(
-          width: 1200,
+          width: width,
           child: SelectionArea(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
