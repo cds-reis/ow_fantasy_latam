@@ -23,7 +23,12 @@ class HomePage extends StatelessWidget {
           children: [
             if (!isMobile)
               const Expanded(child: HomeViewItem(child: BestPlayersView())),
-            const Expanded(child: HomeViewItem(child: AnnouncementsView())),
+            const Expanded(
+              child: HomeViewItem(
+                padding: EdgeInsets.only(top: 24),
+                child: AnnouncementsView(),
+              ),
+            ),
             if (!isMobile)
               const Expanded(child: HomeViewItem(child: NextMatchesView())),
           ],
