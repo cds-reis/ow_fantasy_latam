@@ -113,6 +113,7 @@ Widget _shellBuilder(BuildContext context, GoRouterState state, Widget child) {
         const FantasyAppBar(),
         Expanded(
           child: SingleChildScrollView(
+            primary: true,
             padding: const EdgeInsets.all(24),
             child: child,
           ),
