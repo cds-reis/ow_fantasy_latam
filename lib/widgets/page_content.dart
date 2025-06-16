@@ -5,12 +5,14 @@ class PageContent extends StatelessWidget {
     required this.title,
     required this.children,
     this.showBackButton = false,
+    this.spacing = 4,
     super.key,
   });
 
   final String title;
   final List<Widget> children;
   final bool showBackButton;
+  final double spacing;
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +45,7 @@ class PageContent extends StatelessWidget {
                     padding: const EdgeInsets.all(16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      spacing: 4,
+                      spacing: spacing,
                       children: children,
                     ),
                   ),

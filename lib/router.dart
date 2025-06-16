@@ -5,6 +5,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 
 import 'main.dart';
 import 'pages/about/about_page.dart';
+import 'pages/backoffice/announcements/announcements_page.dart';
 import 'pages/backoffice/backoffice_page.dart';
 import 'pages/backoffice/create_player_scores_page/create_player_scores_page.dart';
 import 'pages/error_page/error_page.dart';
@@ -96,6 +97,10 @@ final router = GoRouter(
             GoRoute(
               path: CreatePlayerScoresPage.routeName,
               pageBuilder: _pageBuilder(const CreatePlayerScoresPage()),
+            ),
+            GoRoute(
+              path: AnnouncementsPage.routeName,
+              pageBuilder: _pageBuilder(const AnnouncementsPage()),
             ),
           ],
         ),
