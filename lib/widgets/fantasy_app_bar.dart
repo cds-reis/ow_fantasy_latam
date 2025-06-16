@@ -8,6 +8,7 @@ import '../pages/home/home_page.dart';
 import '../pages/leaderboard/leaderboard_page.dart';
 import '../utils/build_context_extensions.dart';
 import '../utils/hardstring.dart';
+import 'backoffice_button.dart';
 import 'fantasy_logo.dart';
 import 'login_button.dart';
 import 'navigation_text_button.dart';
@@ -60,49 +61,55 @@ class FantasyAppBar extends StatelessWidget {
           bottom: BorderSide(color: Colors.white),
         ),
       ),
-      child: Row(
-        spacing: 16,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Row(
-            spacing: 8,
-            children: [
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 16),
-                child: FantasyLogo(),
-              ),
-              Text(
-                'OW Fantasy - LATAM',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Row(
+          spacing: 16,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Spacer(),
+            const Row(
+              spacing: 8,
+              children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(vertical: 16),
+                  child: FantasyLogo(),
                 ),
-              ),
-            ],
-          ),
-          NavigationTextButton.appBar(
-            title: 'Home'.hardString,
-            route: HomePage.routeName,
-          ),
-          NavigationTextButton.appBar(
-            title: 'My Team'.hardString,
-            route: FantasyPage.routeName,
-          ),
-          NavigationTextButton.appBar(
-            title: 'Leaderboard'.hardString,
-            route: LeaderboardPage.routeName,
-          ),
-          NavigationTextButton.appBar(
-            title: 'About'.hardString,
-            route: AboutPage.routeName,
-          ),
-          NavigationTextButton.appBar(
-            title: 'Help'.hardString,
-            route: HelpPage.routeName,
-          ),
-          const Gap(48),
-          const LoginButton(),
-        ],
+                Text(
+                  'OW Fantasy - LATAM',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                  ),
+                ),
+              ],
+            ),
+            NavigationTextButton.appBar(
+              title: 'Home'.hardString,
+              route: HomePage.routeName,
+            ),
+            NavigationTextButton.appBar(
+              title: 'My Team'.hardString,
+              route: FantasyPage.routeName,
+            ),
+            NavigationTextButton.appBar(
+              title: 'Leaderboard'.hardString,
+              route: LeaderboardPage.routeName,
+            ),
+            NavigationTextButton.appBar(
+              title: 'About'.hardString,
+              route: AboutPage.routeName,
+            ),
+            NavigationTextButton.appBar(
+              title: 'Help'.hardString,
+              route: HelpPage.routeName,
+            ),
+            const Gap(48),
+            const LoginButton(),
+            const Spacer(),
+            const BackofficeButton(),
+          ],
+        ),
       ),
     );
   }

@@ -117,13 +117,13 @@ class SelectedPlayerItem extends ConsumerWidget {
                                 playerImageProvider(player),
                               );
 
-                              return switch (image) {
-                                AsyncValue(value: Some(:final value)) =>
-                                  Image.memory(value),
-                                _ => const SizedBox(
-                                  // height: double.infinity,
-                                ),
-                              };
+                              return SizedBox.expand(
+                                child: switch (image) {
+                                  AsyncValue(value: Some(:final value)) =>
+                                    Image.memory(value, fit: BoxFit.contain),
+                                  _ => const SizedBox(),
+                                },
+                              );
                             },
                           ),
                         ),

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 
 class HomeViewItem extends StatelessWidget {
-  const HomeViewItem({required this.child, super.key});
+  const HomeViewItem({
+    required this.child,
+    this.padding = const EdgeInsets.all(16),
+    super.key,
+  });
 
   final Widget child;
+  final EdgeInsets padding;
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class HomeViewItem extends StatelessWidget {
         color: Colors.grey.shade900,
         borderRadius: BorderRadius.circular(16),
       ),
-      child: Padding(padding: const EdgeInsets.all(16), child: child),
+      child: Padding(padding: padding, child: child),
     );
   }
 }

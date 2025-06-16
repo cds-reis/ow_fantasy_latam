@@ -9,6 +9,7 @@ import '../pages/login/sign_up_page.dart';
 import '../pages/privacy/privacy_policy.dart';
 import '../pages/terms/terms_conditions.dart';
 import '../providers/supabase_provider.dart';
+import 'logout_provider.dart';
 
 class LoginButton extends ConsumerStatefulWidget {
   const LoginButton({super.key});
@@ -85,21 +86,12 @@ class _LoginButtonChild extends StatelessWidget {
           child: Row(
             spacing: 8,
             children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text(
-                    username ?? 'Login',
-                    style: const TextStyle(
-                      fontSize: 14,
-                      color: Colors.white,
-                    ),
-                  ),
-                  const Text(
-                    'User',
-                    style: TextStyle(fontSize: 14, color: Colors.white),
-                  ),
-                ],
+              Text(
+                username ?? 'Login',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white,
+                ),
               ),
               const Icon(Icons.person, color: Colors.white),
             ],
@@ -189,12 +181,8 @@ class _LoginButtonTooltipContent extends StatelessWidget {
                     builder: (context, ref, child) {
                       return TextButton(
                         onPressed: () async {
-                          final supabase = ref.read(supabaseProvider);
-                          await supabase.auth.signOut();
-
-                          if (context.mounted) {
-                            context.pushReplacement(LoginPage.routeName);
-                          }
+                          context.pushReplacement(LoginPage.routeName);
+                          await ref.read(logoutProvider.future);
                         },
                         child: const Text(
                           'Logout',
