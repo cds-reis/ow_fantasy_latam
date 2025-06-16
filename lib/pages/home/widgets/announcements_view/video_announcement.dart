@@ -51,7 +51,7 @@ class _VideoAnnouncementContentState extends State<_VideoAnnouncementContent> {
       );
       await _controller.initialize();
       setState(() {});
-      await _controller.setVolume(.05);
+      await _controller.setVolume(0);
       await _controller.play();
       talker.info(
         'VideoPlayerController initialized',
