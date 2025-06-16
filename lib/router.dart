@@ -6,6 +6,7 @@ import 'package:talker_flutter/talker_flutter.dart';
 import 'main.dart';
 import 'pages/about/about_page.dart';
 import 'pages/backoffice/backoffice_page.dart';
+import 'pages/backoffice/create_player_scores_page/create_player_scores_page.dart';
 import 'pages/error_page/error_page.dart';
 import 'pages/fantasy/fantasy_page.dart';
 import 'pages/help/help_page.dart';
@@ -91,6 +92,12 @@ final router = GoRouter(
             return null;
           },
           pageBuilder: _pageBuilder(const BackofficePage()),
+          routes: [
+            GoRoute(
+              path: CreatePlayerScoresPage.routeName,
+              pageBuilder: _pageBuilder(const CreatePlayerScoresPage()),
+            ),
+          ],
         ),
       ],
     ),

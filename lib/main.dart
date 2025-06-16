@@ -11,6 +11,7 @@ import 'package:talker_riverpod_logger/talker_riverpod_logger_observer.dart';
 
 import 'config/constants.dart' as constants;
 import 'router.dart';
+import 'theme.dart';
 
 final Talker talker = TalkerFlutter.init();
 
@@ -43,14 +44,7 @@ class MyApp extends StatelessWidget {
       child: MaterialApp.router(
         routerConfig: router,
         title: 'OW Fantasy - LATAM',
-        theme: ThemeData.dark().copyWith(
-          colorScheme: const ColorScheme.dark(primary: Colors.cyan),
-          inputDecorationTheme: const InputDecorationTheme(
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.white),
-            ),
-          ),
-        ),
+        theme: buildTheme(),
       ),
     );
   }

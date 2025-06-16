@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../providers/backofiice/is_user_backoffice_provider.dart';
+import '../../widgets/page_content.dart';
 import '../error_page/error_page.dart';
+import 'create_player_scores_page/create_player_scores_page.dart';
 
 class BackofficePage extends ConsumerStatefulWidget {
   const BackofficePage({super.key});
@@ -35,9 +37,22 @@ class _BackofficePageState extends ConsumerState<BackofficePage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return PageContent(
+      key: const Key('backoffice-page'),
+      title: 'Backoffice',
       children: [
-        Text('Backoffice'),
+        InkWell(
+          onTap: () {
+            context.pushReplacement(CreatePlayerScoresPage.routePath);
+          },
+          child: const Row(
+            spacing: 8,
+            children: [
+              Icon(Icons.add_chart_rounded),
+              Text('Create Player Scores', style: TextStyle(fontSize: 16)),
+            ],
+          ),
+        ),
       ],
     );
   }
