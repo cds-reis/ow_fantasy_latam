@@ -12,6 +12,7 @@ import '../error_page/error_page.dart';
 import 'announcements/announcements_page.dart';
 import 'backoffice_page_item.dart';
 import 'create_player_scores_page/create_player_scores_page.dart';
+import 'video_announcement/current_video_announcement.dart';
 
 class BackofficePage extends ConsumerStatefulWidget {
   const BackofficePage({super.key});
@@ -62,6 +63,12 @@ class _BackofficePageState extends ConsumerState<BackofficePage> {
               title: 'Announcements',
               icon: Icons.announcement,
               routePath: AnnouncementsPage.routePath,
+            ),
+          if (_shouldShow(userRoles, UserRoleName.announcementsCreator))
+            const BackofficePageItem(
+              title: 'Video Announcement',
+              icon: Icons.video_file,
+              routePath: CurrentVideoAnnouncement.routePath,
             ),
         ],
       ),

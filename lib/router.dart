@@ -8,6 +8,7 @@ import 'pages/about/about_page.dart';
 import 'pages/backoffice/announcements/announcements_page.dart';
 import 'pages/backoffice/backoffice_page.dart';
 import 'pages/backoffice/create_player_scores_page/create_player_scores_page.dart';
+import 'pages/backoffice/video_announcement/current_video_announcement.dart';
 import 'pages/error_page/error_page.dart';
 import 'pages/fantasy/fantasy_page.dart';
 import 'pages/help/help_page.dart';
@@ -101,6 +102,10 @@ final router = GoRouter(
             GoRoute(
               path: AnnouncementsPage.routeName,
               pageBuilder: _pageBuilder(const AnnouncementsPage()),
+            ),
+            GoRoute(
+              path: CurrentVideoAnnouncement.routeName,
+              pageBuilder: _pageBuilder(const CurrentVideoAnnouncement()),
             ),
           ],
         ),

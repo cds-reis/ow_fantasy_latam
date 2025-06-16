@@ -120,7 +120,7 @@ class SelectedPlayerItem extends ConsumerWidget {
                               return SizedBox.expand(
                                 child: switch (image) {
                                   AsyncValue(value: Some(:final value)) =>
-                                    Image.memory(value),
+                                    Image.memory(value, fit: BoxFit.contain),
                                   _ => const SizedBox(),
                                 },
                               );
