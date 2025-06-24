@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../../entities/player/player.dart';
-import '../../../../../providers/matches_for_team_provider.dart';
+import '../../../../../providers/matches/matches_for_team_provider.dart';
 import '../../../../../providers/player_submition_status_provider.dart';
 import '../../../../../providers/season_provider.dart';
 import '../../../../../providers/user_roster/user_roster_provider.dart';

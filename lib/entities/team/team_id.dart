@@ -1,1 +1,1 @@
-extension type TeamId(int value) implements int {}
+extension type TeamId(int value) implements Object {}
