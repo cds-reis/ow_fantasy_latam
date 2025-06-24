@@ -27,7 +27,7 @@ Future<PlayerSubmitionStatus> playerSubmitionStatus(
   final weekMonday = now
       .subtract(Duration(days: now.weekday - 1))
       .copyWith(
-        hour: 0,
+        hour: 3,
         minute: 0,
         second: 0,
         millisecond: 0,
