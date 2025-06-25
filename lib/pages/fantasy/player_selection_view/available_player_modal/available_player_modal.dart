@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../../entities/player/player.dart';
 import '../../../../providers/matches_for_team_provider.dart';
 import '../../../../utils/build_context_extensions.dart';
-import '../../../../widgets/player_role_icon.dart';
+import 'player_cost_and_team.dart';
 import 'player_image_display.dart';
 import 'player_matches.dart';
 import 'player_matches_header.dart';
+import 'player_name_and_role.dart';
 import 'player_submit_or_remove_button/player_submit_or_remove_button.dart';
 import 'score_breakdown.dart';
 
@@ -57,8 +58,8 @@ class AvailablePlayerModal extends ConsumerWidget {
                       alignment: Alignment.topRight,
                       child: CloseButton(),
                     ),
-                    _PlayerNameAndRole(player: player),
-                    _PlayerCostAndTeam(player: player),
+                    PlayerNameAndRole(player: player),
+                    PlayerCostAndTeam(player: player),
                     PlayerSubmitOrRemoveButton(player: player),
                     ScoreBreakdown(player: player),
                     const PlayerMatchesHeader(),
@@ -103,8 +104,8 @@ class AvailablePlayerModal extends ConsumerWidget {
               child: Column(
                 spacing: 24,
                 children: [
-                  _PlayerNameAndRole(player: player),
-                  _PlayerCostAndTeam(player: player),
+                  PlayerNameAndRole(player: player),
+                  PlayerCostAndTeam(player: player),
                   Expanded(
                     child: Column(
                       spacing: 16,
@@ -126,61 +127,6 @@ class AvailablePlayerModal extends ConsumerWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class _PlayerCostAndTeam extends StatelessWidget {
-  const _PlayerCostAndTeam({required this.player});
-
-  final Player player;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Wrap(
-        spacing: 16,
-        children: [
-          Text(
-            'Cost: ${player.cost},',
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          Text(
-            'Team: ${player.teamName}',
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class _PlayerNameAndRole extends StatelessWidget {
-  const _PlayerNameAndRole({required this.player});
-
-  final Player player;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      spacing: 16,
-      children: [
-        PlayerRoleIcon(role: player.role, size: 50),
-        Text(
-          player.name,
-          style: const TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-      ],
     );
   }
 }

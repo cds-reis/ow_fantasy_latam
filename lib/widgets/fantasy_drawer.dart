@@ -10,7 +10,7 @@ import '../pages/login/sign_up_page.dart';
 import '../pages/privacy/privacy_policy.dart';
 import '../pages/terms/terms_conditions.dart';
 import '../utils/hardstring.dart';
-import 'fantasy_logo.dart';
+import 'images/fantasy_logo.dart';
 import 'navigation_text_button.dart';
 
 class FantasyDrawer extends StatelessWidget {

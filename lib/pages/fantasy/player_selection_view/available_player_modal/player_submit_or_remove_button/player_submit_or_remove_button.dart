@@ -25,9 +25,7 @@ class PlayerSubmitOrRemoveButton extends ConsumerWidget {
       return const SizedBox(
         width: double.infinity,
         height: 48,
-        child: Center(
-          child: CircularProgressIndicator(),
-        ),
+        child: Center(child: CircularProgressIndicator()),
       );
     }
 

@@ -5,7 +5,7 @@ import '../../entities/leaderboard_entry.dart';
 import '../../providers/leaderboard_provider.dart';
 import '../../utils/build_context_extensions.dart';
 import 'leaderboard_users_view.dart';
-import 'user_rosters_view.dart';
+import 'user_rosters_view/user_rosters_view.dart';
 
 class LeaderboardPage extends ConsumerStatefulWidget {
   const LeaderboardPage({super.key});

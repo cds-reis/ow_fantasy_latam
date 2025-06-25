@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../entities/player/player.dart';
-import '../../../../widgets/player_role_icon.dart';
+import '../../../../widgets/images/player_role_icon.dart';
 import '../available_player_modal/available_player_modal.dart';
 
 class AvailablePlayerItem extends ConsumerWidget {

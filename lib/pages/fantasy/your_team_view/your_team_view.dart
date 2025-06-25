@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'game_week_view.dart';
+import 'game_week_view/game_week_view.dart';
 import 'selected_players_view/selected_players_view.dart';
 import 'submit_or_reset_roster_view.dart';
 

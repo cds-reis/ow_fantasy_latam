@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import '../../entities/leaderboard_entry.dart';
+import 'leaderboard_header.dart';
 import 'leaderboard_item.dart';
 
 class LeaderboardUsersView extends StatelessWidget {
@@ -48,7 +49,7 @@ class LeaderboardUsersView extends StatelessWidget {
                 padding: EdgeInsets.symmetric(
                   horizontal: 24,
                 ),
-                child: _LeaderboardHeader(),
+                child: LeaderboardHeader(),
               ),
               Expanded(
                 child: ListView.separated(
@@ -72,52 +73,6 @@ class LeaderboardUsersView extends StatelessWidget {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _LeaderboardHeader extends StatelessWidget {
-  const _LeaderboardHeader();
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(vertical: 16),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              'Rank',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Expanded(
-            flex: 2,
-            child: Text(
-              'Username',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-          Expanded(
-            child: Text(
-              'Total Score',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ],
       ),
     );
   }

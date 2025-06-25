@@ -9,7 +9,7 @@ import '../pages/leaderboard/leaderboard_page.dart';
 import '../utils/build_context_extensions.dart';
 import '../utils/hardstring.dart';
 import 'backoffice_button.dart';
-import 'fantasy_logo.dart';
+import 'images/fantasy_logo.dart';
 import 'login_button.dart';
 import 'navigation_text_button.dart';
 
