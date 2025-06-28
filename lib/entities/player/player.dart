@@ -5,11 +5,12 @@ import '../season/season_id.dart';
 import '../team/team.dart';
 import '../team/team_id.dart';
 import '../team/team_name.dart';
+import 'latest_player_score.dart';
 import 'player_cost.dart';
 import 'player_id.dart';
 import 'player_name.dart';
 import 'player_role.dart';
-import 'player_score.dart';
+import 'total_player_score.dart';
 
 part 'player.mapper.dart';
 

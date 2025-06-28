@@ -1,5 +1,6 @@
 import 'package:dart_mappable/dart_mappable.dart';
 import 'package:equatable/equatable.dart';
+
 import '../player/player_id.dart';
 
 part 'player_score.mapper.dart';

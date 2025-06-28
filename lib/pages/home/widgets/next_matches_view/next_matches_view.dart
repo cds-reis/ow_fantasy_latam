@@ -20,6 +20,7 @@ Future<IList<Match>> nextMatches(Ref ref, Season season) async {
   final matches = await supabase
       .from('matches')
       .select('''
+        id,
         match_time,
         first_team_score:team_a_score,
         second_team_score:team_b_score,
@@ -31,7 +32,7 @@ Future<IList<Match>> nextMatches(Ref ref, Season season) async {
 ''')
       .eq('weeks.season_id', season.id.value)
       .order('match_time')
-      .limit(20);
+      .limit(10);
 
   return matches.map(MatchMapper.fromMap).toIList();
 }
@@ -64,8 +65,7 @@ class NextMatchesView extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return NextMatchItem(match: matches[index]);
                   },
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(height: 8),
+                  separatorBuilder: (context, index) => const Gap(8),
                 ),
               ),
             );

@@ -4,6 +4,7 @@ import 'package:equatable/equatable.dart';
 import '../team/team.dart';
 import '../team/team_id.dart';
 import '../team/team_name.dart';
+import 'match_id.dart';
 import 'player_score.dart';
 
 part 'match.mapper.dart';
@@ -11,6 +12,7 @@ part 'match.mapper.dart';
 @MappableClass(caseStyle: CaseStyle.snakeCase, hook: MatchHook())
 class Match with MatchMappable, EquatableMixin {
   const Match({
+    required this.id,
     required this.matchTime,
     required this.firstTeam,
     required this.secondTeam,
@@ -20,6 +22,7 @@ class Match with MatchMappable, EquatableMixin {
     this.secondTeamScore,
   });
 
+  final MatchId id;
   final DateTime matchTime;
   final Team firstTeam;
   final Team secondTeam;
@@ -27,6 +30,8 @@ class Match with MatchMappable, EquatableMixin {
   final int? secondTeamScore;
   final List<PlayerScore> playerScores;
   final bool isCompleted;
+
+  String get formatted => '${firstTeam.name} X ${secondTeam.name}';
 
   @override
   List<Object?> get props => [

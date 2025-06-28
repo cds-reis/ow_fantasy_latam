@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../entities/player/player.dart';
-import '../../../../providers/matches_for_team_provider.dart';
+import '../../../../providers/matches/matches_for_team_provider.dart';
 import '../../../../utils/build_context_extensions.dart';
 import '../../../../widgets/player_role_icon.dart';
 import 'player_image_display.dart';
