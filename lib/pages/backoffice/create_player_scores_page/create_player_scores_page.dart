@@ -52,7 +52,10 @@ class _CreatePlayerScoresPageState extends ConsumerState<CreatePlayerScoresPage>
                 return const SizedBox.shrink();
               }
 
-              return CreatePlayerScoresBody(match: selectedMatch);
+              return CreatePlayerScoresBody(
+                key: ValueKey(selectedMatch.id),
+                match: selectedMatch,
+              );
             },
           ),
         ),

@@ -1,18 +1,18 @@
 import 'dart:async';
-import 'dart:collection';
 
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
+import '../../../entities/creating_player_scores/match_scores.dart';
 import '../../../entities/match/match.dart';
-import '../../../entities/player/player.dart';
-import '../../../providers/matches/matches_for_week_provider.dart';
+import '../../../providers/player_scores/create_player_scores_provider.dart';
 import '../../../providers/player_scores/player_scores_for_match.dart';
-import '../../../providers/supabase_provider.dart';
+import '../../../widgets/show_error_dialog.dart';
 import 'create_player_score_presenter.dart';
 import 'player_score_form.dart';
+import 'player_score_item.dart';
+import 'show_create_player_scores_confirmation_dialog.dart';
 
 class CreatePlayerScoresBody extends ConsumerStatefulWidget {
   const CreatePlayerScoresBody({
@@ -48,16 +48,34 @@ class _StateCreatePlayerScoresBody
 
   @override
   Widget build(BuildContext context) {
-    final playerScores = ref.watch(
-      playerScoresForMatchProvider(widget.match.id),
-    );
+    final match = widget.match;
+    final matchId = match.id;
+
+    final playerScores = ref.watch(playerScoresForMatchProvider(matchId));
 
     return playerScores.when(
       data: (playerScores) {
         if (playerScores.isNotEmpty) {
-          return const Center(
-            child: Text(
-              'There are already player scores for this match',
+          return Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 48),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: SizedBox(
+                width: 400,
+                child: Column(
+                  children: [
+                    Center(
+                      child: Text(
+                        '${match.firstTeam.name} ${match.firstTeamScore} : ${match.secondTeamScore} ${match.secondTeam.name}',
+                        style: const TextStyle(fontSize: 24),
+                      ),
+                    ),
+                    const Divider(),
+                    for (final playerScore in playerScores)
+                      PlayerScoreItem(playerScore: playerScore),
+                  ],
+                ),
+              ),
             ),
           );
         }
@@ -71,16 +89,16 @@ class _StateCreatePlayerScoresBody
                 children: [
                   Expanded(
                     child: PlayerScoreForm(
-                      team: widget.match.firstTeam,
-                      matchId: widget.match.id,
+                      team: match.firstTeam,
+                      matchId: matchId,
                       presenter: _firstTeamPresenter,
                     ),
                   ),
                   const VerticalDivider(),
                   Expanded(
                     child: PlayerScoreForm(
-                      team: widget.match.secondTeam,
-                      matchId: widget.match.id,
+                      team: match.secondTeam,
+                      matchId: matchId,
                       presenter: _secondTeamPresenter,
                     ),
                   ),
@@ -88,114 +106,7 @@ class _StateCreatePlayerScoresBody
               ),
             ),
             ElevatedButton(
-              onPressed: () async {
-                final scores = _parseScores(
-                  _firstTeamPresenter,
-                  _secondTeamPresenter,
-                );
-
-                switch (scores) {
-                  case Right(value: final matchScores):
-                    final match = ref.read(selectedMatchProvider)!;
-                    final confirmed = await showDialog<bool>(
-                      context: context,
-                      builder: (context) => AlertDialog(
-                        title: const Text('Confirmation'),
-                        content: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.min,
-                          spacing: 16,
-                          children: [
-                            const Text(
-                              'Are you sure you want to submit the scores?',
-                            ),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              spacing: 16,
-                              children: [
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Text(match.firstTeam.name),
-                                      for (final score
-                                          in matchScores
-                                              .firstTeamScores
-                                              .playerScores)
-                                        Text('${score.$1.name}: ${score.$2}'),
-                                    ],
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    spacing: 8,
-                                    children: [
-                                      Text(match.secondTeam.name),
-                                      for (final score
-                                          in matchScores
-                                              .secondTeamScores
-                                              .playerScores)
-                                        Text('${score.$1.name}: ${score.$2}'),
-                                    ],
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        actions: [
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            child: const Text('Cancel'),
-                          ),
-                          TextButton(
-                            onPressed: () => Navigator.pop(context, true),
-                            child: const Text('Submit'),
-                          ),
-                        ],
-                      ),
-                    );
-
-                    if (confirmed ?? false) {
-                      final supabase = ref.read(supabaseProvider);
-                      final result = await supabase.functions.invoke(
-                        'create-player-scores',
-                        body: {
-                          'match_id': match.id,
-                          'scores': matchScores.toJson(),
-                        },
-                      );
-                    }
-                  case Left(value: final error):
-                    final errorMessage = switch (error) {
-                      EmptyScore() => 'Empty score',
-                      MissingPlayerScores(:final missingPlayers) =>
-                        'Missing player scores: ${missingPlayers.map((player) => player.name).join(', ')}',
-                      DuplicatePlayerIds(:final duplicatePlayers) =>
-                        'Duplicate players: ${duplicatePlayers.map((player) => player.name).join(', ')}',
-                    };
-
-                    unawaited(
-                      showDialog<void>(
-                        context: context,
-                        builder: (context) => AlertDialog(
-                          title: const Text('Error'),
-                          content: Text(errorMessage),
-                          actions: [
-                            TextButton(
-                              onPressed: () => Navigator.pop(context),
-                              child: const Text('OK'),
-                            ),
-                          ],
-                        ),
-                      ),
-                    );
-                }
-              },
+              onPressed: _createPlayerScores,
               child: const Text('Submit'),
             ),
           ],
@@ -205,51 +116,56 @@ class _StateCreatePlayerScoresBody
       loading: () => const Center(child: CircularProgressIndicator()),
     );
   }
-}
 
-Either<BuildingScoresError, MatchScores> _parseScores(
-  CreatePlayerScorePresenter firstTeamPresenter,
-  CreatePlayerScorePresenter secondTeamPresenter,
-) {
-  return Either.Do((
-    $,
-  ) {
-    final firstTeamScores = $(
-      firstTeamPresenter.value.parse(),
-    );
-    final secondTeamScores = $(
-      secondTeamPresenter.value.parse(),
+  Future<void> _createPlayerScores() async {
+    final firstMatchScores = _firstTeamPresenter.value.parse();
+    final secondMatchScores = _secondTeamPresenter.value.parse();
+    final scores = firstMatchScores.flatMap(
+      (a) => secondMatchScores.map((b) => (a, b)),
     );
 
-    return MatchScores._(
-      firstTeamScores: firstTeamScores,
-      secondTeamScores: secondTeamScores,
-    );
-  });
-}
+    switch (scores) {
+      case Right(
+        value: (final firstTeamScores, final secondTeamScores),
+      ):
+        final match = widget.match;
+        final matchScores = MatchScores(
+          matchId: match.id,
+          firstTeamScores: firstTeamScores,
+          secondTeamScores: secondTeamScores,
+        );
 
-class MatchScores extends Equatable {
-  const MatchScores._({
-    required this.firstTeamScores,
-    required this.secondTeamScores,
-  });
+        final confirmed = await showCreatePlayerScoresConfirmationDialog(
+          context: context,
+          match: match,
+          matchScores: matchScores,
+        );
 
-  final SubmittableScores firstTeamScores;
-  final SubmittableScores secondTeamScores;
+        if (confirmed) {
+          try {
+            await ref.read(
+              createPlayerScoresProvider(matchScores).future,
+            );
+            ref.invalidate(playerScoresForMatchProvider(match.id));
+          } on Exception catch (e) {
+            if (mounted) {
+              showErrorDialog(
+                context: context,
+                errorMessage: e.toString(),
+              );
+            }
+          }
+        }
+      case Left(value: final error):
+        final errorMessage = switch (error) {
+          EmptyScore() => 'Empty score',
+          MissingPlayerScores(:final missingPlayers) =>
+            'Missing player scores: ${missingPlayers.map((player) => player.name).join(', ')}',
+          DuplicatePlayerIds(:final duplicatePlayers) =>
+            'Duplicate players: ${duplicatePlayers.map((player) => player.name).join(', ')}',
+        };
 
-  UnmodifiableListView<(Player player, double score)> get allScores =>
-      UnmodifiableListView([
-        ...firstTeamScores.playerScores,
-        ...secondTeamScores.playerScores,
-      ]);
-
-  List<Map<String, dynamic>> toJson() => allScores
-      .map((score) => {'player_id': score.$1.id, 'score': score.$2})
-      .toList();
-
-  @override
-  List<Object?> get props => [
-    firstTeamScores,
-    secondTeamScores,
-  ];
+        showErrorDialog(context: context, errorMessage: errorMessage);
+    }
+  }
 }

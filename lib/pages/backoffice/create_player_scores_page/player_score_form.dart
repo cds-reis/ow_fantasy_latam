@@ -23,102 +23,104 @@ class PlayerScoreForm extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return ref
-        .watch(playersForTeamProvider(team.id))
-        .when(
-          data: (players) => ValueListenableBuilder(
-            valueListenable: presenter,
-            child: Text(team.name, style: const TextStyle(fontSize: 18)),
-            builder: (context, value, child) {
-              final playerScores = value.playerScores;
+    final players = ref.watch(playersForTeamProvider(team.id));
 
-              final addButtonVisible =
-                  value.canAdd && playerScores.length < players.length;
-              return Column(
-                spacing: 16,
-                children: [
-                  ?child,
-                  for (final (index, (playerScore)) in playerScores.indexed)
-                    Row(
-                      spacing: 8,
-                      children: [
-                        Flexible(
-                          flex: 6,
-                          child: Builder(
-                            builder: (context) {
-                              final availablePlayers = [
-                                ?playerScore?.$1,
-                                ...players.where(
-                                  (player) => playerScores.none(
-                                    (score) => score?.$1 == player,
-                                  ),
-                                ),
-                              ];
+    return players.when(
+      data: (players) => ValueListenableBuilder(
+        valueListenable: presenter,
+        child: Text(team.name, style: const TextStyle(fontSize: 18)),
+        builder: (context, value, child) {
+          final playerScores = value.playerScores;
 
-                              return DropdownButtonFormField<Player>(
-                                value: playerScore?.$1,
-                                items: [
-                                  for (final player in availablePlayers)
-                                    DropdownMenuItem(
-                                      value: player,
-                                      child: Text(player.name),
-                                    ),
-                                ],
-                                onChanged: (player) {
-                                  if (player != null) {
-                                    presenter.addPlayer(index, player);
-                                  }
-                                },
-                              );
-                            },
-                          ),
-                        ),
-                        Flexible(
-                          flex: 3,
-                          child: TextField(
-                            keyboardType: const TextInputType.numberWithOptions(
-                              decimal: true,
-                              signed: true,
+          final addButtonVisible =
+              value.canAdd && playerScores.length < players.length;
+          return Column(
+            spacing: 16,
+            children: [
+              ?child,
+              for (final (index, player) in playerScores.indexed.map(
+                (e) => (e.$1, e.$2?.$1),
+              ))
+                Row(
+                  spacing: 8,
+                  children: [
+                    Flexible(
+                      flex: 6,
+                      child: Builder(
+                        builder: (context) {
+                          final availablePlayers = [
+                            ?player,
+                            ...players.where(
+                              (player) => playerScores.none(
+                                (score) => score?.$1 == player,
+                              ),
                             ),
-                            inputFormatters: [_scoreFormatter],
-                            enabled: playerScore != null,
-                            onChanged: (value) {
-                              if (double.tryParse(value) case final score?) {
-                                presenter.addScore(
-                                  playerScore!.$1,
-                                  score,
-                                );
+                          ];
+
+                          return DropdownButtonFormField<Player>(
+                            value: player,
+                            items: [
+                              for (final player in availablePlayers)
+                                DropdownMenuItem(
+                                  value: player,
+                                  child: Text(player.name),
+                                ),
+                            ],
+                            onChanged: (player) {
+                              if (player != null) {
+                                presenter.addPlayer(index, player);
                               }
                             },
-                            decoration: const InputDecoration(
-                              labelText: 'Score',
-                            ),
-                          ),
-                        ),
-                        Flexible(
-                          child: IconButton(
-                            onPressed: value.canRemove
-                                ? () => presenter.remove(index)
-                                : null,
-                            icon: const Icon(Icons.remove),
-                          ),
-                        ),
-                      ],
+                          );
+                        },
+                      ),
                     ),
-                  Visibility(
-                    visible: addButtonVisible,
-                    child: IconButton.filled(
-                      onPressed: presenter.add,
-                      icon: const Icon(Icons.add),
+                    Flexible(
+                      flex: 3,
+                      child: TextField(
+                        keyboardType: const TextInputType.numberWithOptions(
+                          decimal: true,
+                          signed: true,
+                        ),
+                        inputFormatters: [_scoreFormatter],
+                        enabled: player != null,
+                        onChanged: (value) {
+                          if (double.tryParse(value) case final score?) {
+                            presenter.addScore(
+                              player!,
+                              score,
+                            );
+                          }
+                        },
+                        decoration: const InputDecoration(
+                          labelText: 'Score',
+                        ),
+                      ),
                     ),
-                  ),
-                ],
-              );
-            },
-          ),
-          error: (error, stackTrace) => Text(error.toString()),
-          loading: () => const Center(child: CircularProgressIndicator()),
-        );
+                    Flexible(
+                      child: IconButton(
+                        onPressed: value.canRemove
+                            ? () => presenter.remove(index)
+                            : null,
+                        icon: const Icon(Icons.remove),
+                      ),
+                    ),
+                  ],
+                ),
+              Visibility(
+                visible: addButtonVisible,
+                child: IconButton.filled(
+                  onPressed: presenter.add,
+                  icon: const Icon(Icons.add),
+                ),
+              ),
+            ],
+          );
+        },
+      ),
+      error: (error, stackTrace) => Text(error.toString()),
+      loading: () => const Center(child: CircularProgressIndicator()),
+    );
   }
 }
 

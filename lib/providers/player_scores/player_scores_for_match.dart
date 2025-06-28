@@ -15,7 +15,8 @@ Future<IList<PlayerScoreForMatch>> playerScoresForMatch(
 ) async {
   final playerScores = await ref
       .watch(playerScoresQueryProvider)
-      .eq('match_id', matchId);
+      .eq('match_id', matchId)
+      .order('score');
 
   return playerScores.map(PlayerScoreForMatchMapper.fromMap).toIList();
 }
