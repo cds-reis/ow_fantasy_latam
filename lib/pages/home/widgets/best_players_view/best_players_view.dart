@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 
 import '../../../../providers/season_provider.dart';
 import '../../../../utils/hardstring.dart';
+import '../../../../widgets/my_tank_is_dead_image.dart';
 import 'best_player_item.dart';
 import 'best_players_provider.dart';
 
@@ -16,6 +17,8 @@ class BestPlayersView extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const Center(child: MyTankIsDeadImage()),
+          const Gap(16),
           Row(
             spacing: 16,
             children: [
