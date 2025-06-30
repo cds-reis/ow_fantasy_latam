@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import '../../../../entities/announcement/announcement_language.dart';
+import '../../../../utils/build_context_extensions.dart';
+import '../../../../widgets/my_tank_is_dead_image.dart';
 import 'announcement_language_view.dart';
 import 'video_announcement.dart';
 
@@ -18,6 +20,13 @@ class AnnouncementsView extends StatelessWidget {
             'OW Fantasy - LATAM',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
+          if (context.isMobile)
+            const Flexible(
+              child: Padding(
+                padding: EdgeInsets.all(16),
+                child: MyTankIsDeadImage(),
+              ),
+            ),
           const Flexible(
             child: Padding(
               padding: EdgeInsets.all(16),
